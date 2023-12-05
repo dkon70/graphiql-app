@@ -42,7 +42,7 @@ const Footer = () => {
         <p>© 2023</p>
       </section>
       <section data-testid="section">
-        <Link href="https://rs.school/">
+        <Link href="https://rs.school/react/">
           <Image src={rsLogo} alt="rs-logo" className="w-10 h-10 rounded-sm" />
         </Link>
       </section>
