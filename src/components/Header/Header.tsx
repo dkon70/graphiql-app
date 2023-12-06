@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
+  //TODO delete this line
+  const user = false;
+
   useEffect(() => {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 0) {
@@ -32,7 +35,9 @@ const Header = () => {
           <Switch />
           RU
         </span>
-        <Button variant="secondary">Sign out</Button>
+        <Button variant="secondary">
+          {user ? 'Sign Out' : 'Login/register'}
+        </Button>
       </div>
     </header>
   );
