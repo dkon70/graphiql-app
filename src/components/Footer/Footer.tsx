@@ -9,7 +9,10 @@ const Footer = () => {
       className="bg-slate-800 w-full p-5 flex max-md:flex-col max-md:gap-5 justify-between text-white items-center static"
       data-testid="footer"
     >
-      <section className="flex gap-2" data-testid="section">
+      <section
+        className="flex gap-2 max-[360px]:flex-col max-[360px]:items-center"
+        data-testid="section"
+      >
         <Image className="w-5 h-5" src={githubIcon} alt="github" />
         <ul className="flex gap-5 w-0 max-md:w-full">
           <li className="flex gap-2">
