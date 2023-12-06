@@ -1,4 +1,4 @@
-import '@/firebase';
+// import '@/firebase';
 import Link from 'next/link';
 
 export default function Home() {
