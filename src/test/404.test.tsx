@@ -7,7 +7,7 @@ describe('404 page tests:', () => {
     render(<NotFound />);
 
     const heading = screen.getByText('404');
-    const button = screen.getByRole('button');
+    const button = screen.getByText('Go Home');
     expect(heading).toBeInTheDocument();
     expect(button).toBeInTheDocument();
   });
