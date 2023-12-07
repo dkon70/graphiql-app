@@ -1,7 +1,8 @@
 import { Button } from '../ui/button';
-import { Switch } from '../ui/switch';
+
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { Switch } from '../ui/switch';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);

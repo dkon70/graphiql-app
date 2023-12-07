@@ -25,7 +25,7 @@ export default function Hero() {
               Welcome to <span className="text-green-500">Rick and Morty</span>{' '}
               GraphQl
             </h1>
-            <p className='px-2'>
+            <p className="px-2">
               Welcome to our GraphQL-powered website! This is the main page
               where you can explore the amazing world of the Rick and Morty API
               using GraphQL. Discover information about your favorite
