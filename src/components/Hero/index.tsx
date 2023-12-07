@@ -4,13 +4,17 @@ import Image from 'next/image';
 import image from 'src/images/rick-and-morty.png';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import CardSection from '../ui/CardSection';
+import AboutSection from '../ui/AboutSection';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 export default function Hero() {
   //TODO remove this line and add correct user
   const user = false;
   return (
-    <div className="container">
+    <>
+    <Header />
+    <div className="container my-4">
       <div className="flex flex-col   items-center justify-center  text-center">
         <div className="flex flex-col   items-center justify-center md:flex-row ">
           <Image
@@ -54,9 +58,11 @@ export default function Hero() {
         )}
         <Separator className="my-4" />
         <div className="flex flex-col  md:flex-row items-center justify-center  text-center">
-          <CardSection />
+          <AboutSection />
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
