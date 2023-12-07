@@ -1,6 +1,6 @@
-import Header from '@/components/Header/Header';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import Header from '@/components/Header/Header';
 
 describe('Tests for header', () => {
   test('Header exists', () => {
