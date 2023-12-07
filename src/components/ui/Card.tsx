@@ -8,12 +8,7 @@ type CardProps = {
   testId?: string;
 };
 
-const Card = ({
-  photo,
-  name,
-  description,
-  testId = 'card',
-}: CardProps) => {
+const Card = ({ photo, name, description, testId = 'card' }: CardProps) => {
   return (
     <div data-testid={testId} className="bg-white rounded-lg shadow-lg p-5">
       <Image

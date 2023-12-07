@@ -9,7 +9,9 @@ describe('Card component', () => {
     const name = 'John Doe';
     const description = 'Lorem ipsum dolor sit amet';
 
-    render(<Card photo={photo} name={name} description={description} testId='card' />);
+    render(
+      <Card photo={photo} name={name} description={description} testId="card" />
+    );
 
     const cardElement = screen.getByTestId('card');
     const imageElement = screen.getByAltText(name);
@@ -20,6 +22,5 @@ describe('Card component', () => {
     expect(imageElement).toBeInTheDocument();
     expect(nameElement).toBeInTheDocument();
     expect(descriptionElement).toBeInTheDocument();
-  
   });
 });

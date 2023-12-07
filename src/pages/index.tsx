@@ -2,10 +2,10 @@ import Layout from './layout';
 import Hero from '@/components/Main';
 
 export default function Home() {
-  return 
+  return;
   <>
-   <Layout>
-     <Hero />
-   </Layout>
+    <Layout>
+      <Hero />
+    </Layout>
   </>;
 }

@@ -16,4 +16,3 @@ test('renders login and register links when user is not logged in', () => {
   expect(loginLink).toBeInTheDocument();
   expect(registerLink).toBeInTheDocument();
 });
-
