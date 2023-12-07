@@ -1,9 +1,11 @@
+import Layout from './layout';
 import Hero from '@/components/Main';
 
 export default function Home() {
-  return (
-    <section>
-      <Hero />
-    </section>
-  );
+  return 
+  <>
+   <Layout>
+     <Hero />
+   </Layout>
+  </>;
 }
