@@ -28,7 +28,7 @@ const Header = () => {
       data-testid="header"
     >
       <div>
-        <Link href="/welcome">Welcome page</Link>
+        <Link href="/">Home</Link>
       </div>
       <div className="flex items-center gap-5">
         <span className="flex items-center gap-2">
