@@ -1,10 +1,8 @@
 import Hero from '@/componets/Hero';
 
-
-
 export default function Home() {
   return (
-    <section >
+    <section>
       <Hero />
     </section>
   );
