@@ -1,19 +1,21 @@
-// components/Card.js
-
 import Image, { StaticImageData } from 'next/image';
 import React from 'react';
+
+type CardProps = {
+  photo: StaticImageData;
+  name: string;
+  description: string;
+  testId?: string;
+};
 
 const Card = ({
   photo,
   name,
   description,
-}: {
-  photo: StaticImageData;
-  name: string;
-  description: string;
-}) => {
+  testId = 'card',
+}: CardProps) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-5">
+    <div data-testid={testId} className="bg-white rounded-lg shadow-lg p-5">
       <Image
         src={photo}
         alt={name}

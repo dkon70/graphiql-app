@@ -5,15 +5,12 @@ import image from 'src/images/rick-and-morty.png';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import AboutSection from '../ui/AboutSection';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 
-export default function Hero() {
+
+export default function Main() {
   //TODO remove this line and add correct user
   const user = false;
   return (
-    <>
-      <Header />
       <div className="container my-4">
         <div className="flex flex-col   items-center justify-center  text-center">
           <div className="flex flex-col   items-center justify-center md:flex-row ">
@@ -62,7 +59,5 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
   );
 }
