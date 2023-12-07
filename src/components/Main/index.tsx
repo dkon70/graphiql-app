@@ -10,9 +10,9 @@ export default function Main() {
   //TODO remove this line and add correct user
   const user = false;
   return (
-    <div className="container my-4">
-      <div className="flex flex-col   items-center justify-center  text-center">
-        <div className="flex flex-col   items-center justify-center md:flex-row ">
+    <div className=" my-4 ">
+      <div className="flex flex-col   items-center justify-center  text-center ">
+        <div className="flex flex-col   items-center justify-center md:flex-row max-w-7xl">
           <Image
             src={image}
             alt="Rick and Morty"
@@ -52,7 +52,7 @@ export default function Main() {
             </Link>
           </div>
         )}
-        <Separator className="my-4" />
+        <Separator className="my-4 max-w-7xl" />
         <div className="flex flex-col  md:flex-row items-center justify-center  text-center">
           <AboutSection />
         </div>

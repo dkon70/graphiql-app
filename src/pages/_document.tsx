@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="flex flex-col justify-between items-center">
+      <body>
         <Main />
         <NextScript />
       </body>
