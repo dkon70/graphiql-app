@@ -1,7 +1,8 @@
 import { Button } from '../ui/button';
-import { Switch } from '../ui/switch';
+
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { Switch } from '../ui/switch';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,7 +28,7 @@ const Header = () => {
       data-testid="header"
     >
       <div>
-        <Link href="/welcome">Welcome page</Link>
+        <Link href="/">Home</Link>
       </div>
       <div className="flex items-center gap-5">
         <span className="flex items-center gap-2">
