@@ -18,7 +18,7 @@ import { SignInFormSchema, SignUpFormSchema } from './Schema';
 import { signUp } from '@/firebase/signUp';
 import { signIn } from '@/firebase/signIn';
 
-export async function InputForm({ mode }: { mode: string }) {
+export function InputForm({ mode }: { mode: string }) {
   const defaultdata =
     mode === 'signUp'
       ? {
@@ -50,65 +50,73 @@ export async function InputForm({ mode }: { mode: string }) {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
-        {mode === 'signUp' && (
+    <>
+      <h1 className="font-bold text-xl mb-5">
+        {mode === 'signUp' ? 'Registration' : 'Authorization'}
+      </h1>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-2/3 space-y-6"
+        >
+          {mode === 'signUp' && (
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Your name"
+                      {...field}
+                      autoComplete="username"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
           <FormField
             control={form.control}
-            name="username"
+            name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>E-mail</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Your name"
+                    placeholder="Your e-mail"
                     {...field}
-                    autoComplete="username"
+                    autoComplete="email"
                   />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-        )}
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>E-mail</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Your e-mail"
-                  {...field}
-                  autoComplete="email"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Your password"
-                  {...field}
-                  autoComplete={
-                    mode === 'signUp' ? 'new-password' : 'current-password'
-                  }
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Your password"
+                    {...field}
+                    autoComplete={
+                      mode === 'signUp' ? 'new-password' : 'current-password'
+                    }
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
+    </>
   );
 }
