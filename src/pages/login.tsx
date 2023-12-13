@@ -5,9 +5,15 @@ import { useRouter } from 'next/router';
 import Layout from './layout';
 
 export default function SignInPage() {
-  const [user, loading] = useAuthState(auth);
-
+  const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
+
+  if (error) {
+    return <h1>Error: {error.message}</h1>;
+  }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
   if (user) {
     router.push('/');
   }

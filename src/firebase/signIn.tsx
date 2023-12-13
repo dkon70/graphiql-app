@@ -9,9 +9,7 @@ export const signIn = async ({
   password: string;
 }) => {
   try {
-    const res = await signInWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    console.log('sign in firebase', user);
+    await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
     alert(err);

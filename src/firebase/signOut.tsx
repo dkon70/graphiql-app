@@ -3,5 +3,4 @@ import { auth } from './index';
 
 export const signout = () => {
   signOut(auth);
-  console.log('sign out');
 };
