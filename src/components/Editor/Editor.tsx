@@ -24,6 +24,7 @@ const Editor = () => {
     <div className="flex overflow-auto h-[100%] bg-slate-700 overflow-y-auto py-2">
       <div
         id="lineNumbers"
+        data-testid="lineNumbers"
         className="w-10 h-[100%] flex flex-col justify-start items-center overflow-hidden top-0"
       >
         {lines.map((line) => (
@@ -38,6 +39,7 @@ const Editor = () => {
         className="resize-none w-[100%] pr-10 outline-none overflow-x-auto whitespace-pre text-white bg-slate-700"
         onChange={linesHandler}
         onScroll={handleTextareaScroll}
+        data-testid="textarea"
       />
     </div>
   );
