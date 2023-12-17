@@ -20,6 +20,24 @@ const Editor = () => {
     }
   };
 
+  const handleTabs = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      const { selectionStart, selectionEnd } = event.currentTarget;
+      const newValue =
+        textareaValue.substring(0, selectionStart) +
+        '\t' +
+        textareaValue.substring(selectionEnd);
+      setTextareaValue(newValue);
+
+      const newCursorPosition = selectionStart + 1;
+      event.currentTarget.setSelectionRange(
+        newCursorPosition,
+        newCursorPosition
+      );
+    }
+  };
+
   return (
     <div className="flex overflow-auto h-[100%] bg-slate-700 overflow-y-auto py-2">
       <div
@@ -38,6 +56,7 @@ const Editor = () => {
         value={textareaValue}
         className="resize-none w-[100%] pr-10 outline-none overflow-x-auto whitespace-pre text-white bg-slate-700"
         onChange={linesHandler}
+        onKeyDown={handleTabs}
         onScroll={handleTextareaScroll}
         data-testid="textarea"
       />

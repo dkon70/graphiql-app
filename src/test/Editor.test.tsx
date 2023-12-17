@@ -21,4 +21,12 @@ describe('Editor component tests', () => {
     const lineNumbers = screen.getByTestId('lineNumbers');
     expect(lineNumbers.scrollTop).toBe(100);
   });
+
+  test('handles tabs correctly', () => {
+    render(<Editor />);
+    const textarea: HTMLTextAreaElement = screen.getByTestId('textarea');
+    fireEvent.change(textarea, { target: { value: 'Hello, World!' } });
+    fireEvent.keyDown(textarea, { key: 'Tab', keyCode: 9, which: 9 });
+    expect(textarea.value).toBe('Hello, World!\t');
+  });
 });
