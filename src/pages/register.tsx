@@ -1,11 +1,9 @@
-'use client';
-
 import { auth } from '@/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { InputForm } from '@/components/Form/Form';
 import { useRouter } from 'next/router';
 
-export default function SignInPage() {
+export default function RegisterPage() {
   const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
 
