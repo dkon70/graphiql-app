@@ -45,7 +45,7 @@ const Editor = () => {
       <div
         ref={lineNumbersRef}
         data-testid="lineNumbers"
-        className="w-10 flex flex-col justify-start items-center overflow-hidden top-0"
+        className="w-10 flex flex-col justify-start items-center overflow-hidden top-0 pb-[15px]"
       >
         {lines.map((line) => (
           <span key={line} className="text-gray-500">
@@ -56,7 +56,7 @@ const Editor = () => {
       <textarea
         ref={textareaRef}
         value={textareaValue}
-        className="resize-none w-[100%] pr-10 outline-none overflow-x-auto whitespace-pre text-white bg-slate-700"
+        className="resize-none w-[100%] pr-10 outline-none overflow-x-auto whitespace-pre text-white bg-slate-700 mb-1"
         onChange={linesHandler}
         onKeyDown={handleTabs}
         onScroll={handleTextareaScroll}
