@@ -14,7 +14,7 @@ export default function LoginPage() {
     return <p>Loading...</p>;
   }
   if (user) {
-    router.push('/');
+    router.push('/main');
   }
 
   return (

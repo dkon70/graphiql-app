@@ -46,7 +46,7 @@ export function InputForm({ mode }: { mode: string }) {
     } else {
       await signIn(data);
     }
-    router.push('/');
+    router.push('/main');
   }
 
   return (
