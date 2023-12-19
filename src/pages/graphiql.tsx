@@ -6,6 +6,7 @@ import downArrow from '../../public/down-arrow.svg';
 import { useState } from 'react';
 import Image from 'next/image';
 import docsButton from '../../public/docs.svg';
+import EndpointEditor from '@/components/EndpointEditor/EndpointEditor';
 
 const Graphiql = () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -96,6 +97,7 @@ const Graphiql = () => {
                   Headers
                 </button>
               </div>
+              <EndpointEditor />
               <button
                 onClick={arrowClickHandler}
                 className="bg-slate-700 w-10 h-10 hover:bg-slate-600 duration-150 p-1 rounded"
