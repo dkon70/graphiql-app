@@ -66,15 +66,12 @@ export function InputForm({ mode }: { mode: string }) {
   }
 
   return (
-    <>
+    <div className="w-80 lg:w-96 p-5">
       <h1 className="font-bold text-xl mb-5">
         {mode === 'signUp' ? 'Registration' : 'Authorization'}
       </h1>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           {mode === 'signUp' && (
             <FormField
               control={form.control}
@@ -133,6 +130,6 @@ export function InputForm({ mode }: { mode: string }) {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
-    </>
+    </div>
   );
 }

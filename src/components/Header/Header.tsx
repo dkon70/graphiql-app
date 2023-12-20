@@ -5,7 +5,6 @@ import { Switch } from '../ui/switch';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { signout } from '@/firebase/signOut';
-import { cn } from '@/lib/utils';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,7 +28,9 @@ const Header = () => {
       data-testid="header"
     >
       <div>
-        <Link href="/">Home</Link>
+        <Link href="/" className="mr-5">
+          Home
+        </Link>
       </div>
       <div className="flex items-center gap-8">
         <span className="flex items-center gap-2">
@@ -47,13 +48,10 @@ const Header = () => {
             Sign Out
           </Button>
         ) : (
-          <div>
+          <span className="flex flex-wrap justify-end gap-1">
             <Link
               href={'/login'}
-              className={cn(
-                buttonVariants({ variant: 'secondary', size: 'sm' }),
-                'mr-5'
-              )}
+              className={buttonVariants({ variant: 'secondary', size: 'sm' })}
             >
               Login
             </Link>
@@ -63,7 +61,7 @@ const Header = () => {
             >
               Register
             </Link>
-          </div>
+          </span>
         )}
       </div>
     </header>
