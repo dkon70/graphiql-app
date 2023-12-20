@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { SignInFormSchema, SignUpFormSchema } from './Schema';
 import { signUp } from '@/firebase/signUp';
 import { signIn } from '@/firebase/signIn';
+import { toast } from '../ui/use-toast';
 
 export function InputForm({ mode }: { mode: string }) {
   const defaultdata =
@@ -41,12 +42,27 @@ export function InputForm({ mode }: { mode: string }) {
 
   const router = useRouter();
   async function onSubmit(data: formDataType) {
-    if (data.username) {
-      await signUp(data);
-    } else {
-      await signIn(data);
+    try {
+      if (data.username) {
+        await signUp(data);
+      } else {
+        await signIn(data);
+      }
+      toast({
+        variant: 'success',
+        title: 'Success',
+        description: 'You are successfully authorized',
+      });
+      router.push('/main');
+    } catch (err) {
+      if (err instanceof Error) {
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: err.message,
+        });
+      }
     }
-    router.push('/main');
   }
 
   return (
