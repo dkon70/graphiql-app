@@ -7,12 +7,6 @@ export default function LoginPage() {
   const [user, loading, error] = useAuthState(auth);
   const router = useRouter();
 
-  if (error) {
-    return <h1>Error: {error.message}</h1>;
-  }
-  if (loading) {
-    return <p>Loading...</p>;
-  }
   if (user) {
     router.push('/main');
   }
@@ -20,7 +14,13 @@ export default function LoginPage() {
   return (
     <>
       <main className="w-full h-[calc(100vh-160px)] flex flex-col justify-center items-center">
-        {loading ? <h1>Loading...</h1> : <InputForm mode="signIn" />}
+        {error ? (
+          <h1>error.message</h1>
+        ) : loading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <InputForm mode="signIn" />
+        )}
       </main>
     </>
   );

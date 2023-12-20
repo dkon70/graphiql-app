@@ -2,8 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
-
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -40,7 +38,6 @@ export function InputForm({ mode }: { mode: string }) {
     defaultValues: defaultdata,
   });
 
-  const router = useRouter();
   async function onSubmit(data: formDataType) {
     try {
       if (data.username) {
@@ -53,7 +50,6 @@ export function InputForm({ mode }: { mode: string }) {
         title: 'Success',
         description: 'You are successfully authorized',
       });
-      router.push('/main');
     } catch (err) {
       if (err instanceof Error) {
         toast({
