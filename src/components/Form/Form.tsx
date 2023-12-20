@@ -112,6 +112,7 @@ export function InputForm({ mode }: { mode: string }) {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input
+                    type="password"
                     placeholder="Your password"
                     {...field}
                     autoComplete={
