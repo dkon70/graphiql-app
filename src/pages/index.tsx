@@ -1,11 +1,5 @@
-import Layout from './layout';
-import Hero from '@/components/Main';
+import Welcome from '@/components/Welcome';
 
 export default function Home() {
-  return(
-    <Layout>
-      <Hero />
-    </Layout>
-  )
-
+  return <Welcome />;
 }

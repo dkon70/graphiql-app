@@ -1,14 +1,10 @@
 import { Separator } from '@/components/ui/separator';
-import Link from 'next/link';
 import Image from 'next/image';
 import image from 'src/images/rick-and-morty.png';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import AboutSection from '../ui/AboutSection';
+import WelcomeButtons from '../ui/welcomeButtons';
 
-export default function Main() {
-  //TODO remove this line and add correct user
-  const user = false;
+export default function Welcome() {
   return (
     <div className=" my-4 ">
       <div className="flex flex-col   items-center justify-center  text-center ">
@@ -34,24 +30,7 @@ export default function Main() {
             </p>
           </div>
         </div>
-
-        {user ? (
-          <Link className="my-10" href={'/main'}>
-            Dashboard
-          </Link>
-        ) : (
-          <div className="flex space-x-4 my-6">
-            <Link
-              href={'/login'}
-              className={cn(buttonVariants(), 'py-4 px-6 text-sm')}
-            >
-              Login
-            </Link>
-            <Link href={'/register'} className={buttonVariants()}>
-              Register
-            </Link>
-          </div>
-        )}
+        <WelcomeButtons />
         <Separator className="my-4 max-w-7xl" />
         <div className="flex flex-col  md:flex-row items-center justify-center  text-center">
           <AboutSection />
