@@ -1,9 +1,19 @@
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { Toaster } from '@/components/ui/toaster';
+import { useLang } from '@/lib/langContext';
 
 const Layout = ({ children }: { children: ReactNode }) => {
+  const { updateLang } = useLang();
+
+  useEffect(() => {
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) {
+      updateLang(savedLang);
+    }
+  }, []);
+
   return (
     <>
       <Header />

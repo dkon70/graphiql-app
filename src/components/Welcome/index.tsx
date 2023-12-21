@@ -3,8 +3,13 @@ import Image from 'next/image';
 import image from 'src/images/rick-and-morty.png';
 import AboutSection from '../ui/AboutSection';
 import WelcomeButtons from '../ui/welcomeButtons';
+import { useLang } from '@/lib/langContext';
+import { TextContentType, textContent } from '@/lib/langText';
 
 export default function Welcome() {
+  const { lang } = useLang();
+  const text = textContent[lang as keyof TextContentType].welcome;
+
   return (
     <div className=" my-4 ">
       <div className="flex flex-col   items-center justify-center  text-center ">
@@ -18,16 +23,11 @@ export default function Welcome() {
 
           <div className="lg:w-7/12">
             <h1 className="mb-6 text-3xl font-medium ">
-              Welcome to <span className="text-green-500">Rick and Morty</span>{' '}
-              GraphQl
+              {text.title[1]}
+              <span className="text-green-500">{text.title[2]}</span>
+              {text.title[3]}
             </h1>
-            <p className="px-2">
-              Welcome to our GraphQL-powered website! This is the main page
-              where you can explore the amazing world of the Rick and Morty API
-              using GraphQL. Discover information about your favorite
-              characters, episodes, and more. Get ready for an exciting journey
-              through the multiverse!
-            </p>
+            <p className="px-2">{text.text}</p>
           </div>
         </div>
         <WelcomeButtons />

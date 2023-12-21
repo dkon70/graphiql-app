@@ -1,31 +1,41 @@
 'use client';
 
+import { TextContentType, textContent } from '@/lib/langText';
 import * as z from 'zod';
+
+let lang = 'en';
+if (typeof window !== 'undefined' && window.localStorage) {
+  const savedLang = localStorage.getItem('lang');
+  if (savedLang) {
+    lang = savedLang;
+  }
+}
+const text = textContent[lang as keyof TextContentType].validation;
 
 export const SignInFormSchema = z.object({
   email: z.string().email(),
   password: z
     .string()
     .min(8, {
-      message: 'Password must be at least 8 characters.',
+      message: text.password.min,
     })
     .max(32, {
-      message: 'Password must be at least 2 characters.',
+      message: text.password.max,
     })
     .regex(/[a-zA-Z]/, {
-      message: 'Password must contain a latin letter',
+      message: text.password.latin,
     })
     .regex(/[0-9]/, {
-      message: 'Password must contain a number',
+      message: text.password.number,
     })
     .regex(/[,."'!@#$%^&*()_+=-]/, {
-      message: `Password must contain a special character: ,."'!@#$%^&*()_+=-`,
+      message: text.password.symbol,
     }),
 });
 
 export const SignUpFormSchema = SignInFormSchema.extend({
   username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
+    message: text.username,
   }),
 });
 

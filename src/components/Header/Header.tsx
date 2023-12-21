@@ -5,10 +5,14 @@ import { Switch } from '../ui/switch';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { signout } from '@/firebase/signOut';
+import { useLang } from '@/lib/langContext';
+import { textContent, TextContentType } from '@/lib/langText';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [user] = useAuthState(auth);
+  const { lang, switchLang } = useLang();
+  const text = textContent[lang as keyof TextContentType].header;
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -29,14 +33,14 @@ const Header = () => {
     >
       <div>
         <Link href="/" className="mr-5">
-          Home
+          {text.home}
         </Link>
       </div>
       <div className="flex items-center gap-8">
         <span className="flex items-center gap-2">
-          EN
-          <Switch />
-          RU
+          {text.en}
+          <Switch onClick={switchLang} checked={lang === 'en' ? false : true} />
+          {text.ru}
         </span>
         {user ? (
           <Button
@@ -45,7 +49,7 @@ const Header = () => {
               signout();
             }}
           >
-            Sign Out
+            {text.signOut}
           </Button>
         ) : (
           <span className="flex flex-wrap justify-end gap-1">
@@ -53,13 +57,13 @@ const Header = () => {
               href={'/login'}
               className={buttonVariants({ variant: 'secondary', size: 'sm' })}
             >
-              Login
+              {text.login}
             </Link>
             <Link
               href={'/register'}
               className={buttonVariants({ variant: 'secondary', size: 'sm' })}
             >
-              Register
+              {text.register}
             </Link>
           </span>
         )}
