@@ -48,7 +48,7 @@ const Graphiql = () => {
 
   return (
     <Layout>
-      <div className="flex">
+      <div className="flex bg-slate-700">
         <div
           className={`bg-slate-700 h-[calc(100vh-160px)] border-r border-solid border-gray-500 py-2 px-2`}
         >
@@ -67,19 +67,25 @@ const Graphiql = () => {
           </div>
         )}
         <div className="flex-col w-[50%]">
-          <div className={`flex ${isEditorOpen ? 'h-[500px]' : 'h-[730px]'}`}>
+          <div
+            className={`flex ${
+              isEditorOpen
+                ? 'h-[calc(100vh-160px-260px)]'
+                : 'h-[calc(100vh-160px-75px)]'
+            }`}
+          >
             <Editor />
             <JSONViewerButtons />
           </div>
           <div
             className={`bg-slate-700 ${
               isEditorOpen
-                ? 'h-[calc(100vh-160px-500px)]'
+                ? 'h-[calc(100vh-160px-700px)]'
                 : 'h-[calc(100vh-160px-730px)]'
             } border-t border-solid border-gray-500 px-2 flex-col py-2`}
           >
-            <div className="flex justify-between items-center">
-              <div className="flex justify-around w-[20%]">
+            <div className="flex bg-slate-700 justify-between items-center">
+              <div className="flex justify-between w-[20%]">
                 <button
                   className={`bg-slate-700 ${
                     isVariablesOpen ? 'text-white' : 'text-gray-300'
@@ -106,7 +112,7 @@ const Graphiql = () => {
               </button>
             </div>
             {isEditorOpen && (
-              <div className="h-[calc(100vh-160px-500px-80px)] w-[100%]">
+              <div className="h-[calc(100vh-160px-600px)] w-[100%]">
                 <Editor />
               </div>
             )}
