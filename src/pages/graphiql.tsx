@@ -7,12 +7,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 import docsButton from '../../public/docs.svg';
 import EndpointEditor from '@/components/EndpointEditor/EndpointEditor';
+import urlButton from '../../public/url.svg';
 
 const Graphiql = () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isVariablesOpen, setVariablesOpen] = useState(false);
   const [isHeadersOpen, setHeadersOpen] = useState(false);
   const [isDocsOpen, setDocsOpen] = useState(false);
+  const [isUrlOpen, setUrlOpne] = useState(false);
 
   const arrowClickHandler = () => {
     if (isEditorOpen) {
@@ -39,10 +41,28 @@ const Graphiql = () => {
   };
 
   const docsOpenHandler = () => {
-    if (isDocsOpen) {
-      setDocsOpen(false);
+    if (!isUrlOpen) {
+      if (isDocsOpen) {
+        setDocsOpen(false);
+      } else {
+        setDocsOpen(true);
+      }
     } else {
+      setUrlOpne(false);
       setDocsOpen(true);
+    }
+  };
+
+  const urlOpenHandler = () => {
+    if (!isDocsOpen) {
+      if (isUrlOpen) {
+        setUrlOpne(false);
+      } else {
+        setUrlOpne(true);
+      }
+    } else {
+      setDocsOpen(false);
+      setUrlOpne(true);
     }
   };
 
@@ -50,20 +70,34 @@ const Graphiql = () => {
     <Layout>
       <div className="flex bg-slate-700">
         <div
-          className={`bg-slate-700 h-[calc(100vh-160px)] border-r border-solid border-gray-500 py-2 px-2`}
+          className={`bg-slate-700 h-[calc(100vh-160px)] w-[57px] border-r border-solid border-gray-500 py-2 px-2`}
         >
           <button
             className={` ${
               isDocsOpen && 'bg-slate-600'
-            } bg-slate-700 hover:bg-slate-600 rounded h-10 w-10 p-1 duration-150`}
+            } bg-slate-700 hover:bg-slate-600 rounded mb-1 h-10 w-10 p-1 duration-150`}
             onClick={docsOpenHandler}
           >
             <Image src={docsButton} alt="docs" />
+          </button>
+          <button
+            className={` ${
+              isDocsOpen && 'bg-slate-600'
+            } bg-slate-700 hover:bg-slate-600 rounded h-10 w-10 p-2 duration-150`}
+            onClick={urlOpenHandler}
+          >
+            <Image src={urlButton} alt="url" />
           </button>
         </div>
         {isDocsOpen && (
           <div className="w-[500px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5">
             <h3 className="text-white text-3xl">Docs</h3>
+          </div>
+        )}
+        {isUrlOpen && (
+          <div className="w-[500px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5">
+            <h3 className="text-white pl-2 text-3xl">URL</h3>
+            <EndpointEditor />
           </div>
         )}
         <div className="flex-col w-[50%]">
@@ -103,7 +137,6 @@ const Graphiql = () => {
                   Headers
                 </button>
               </div>
-              <EndpointEditor />
               <button
                 onClick={arrowClickHandler}
                 className="bg-slate-700 w-10 h-10 hover:bg-slate-600 duration-150 p-1 rounded"
