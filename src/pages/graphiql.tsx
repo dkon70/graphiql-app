@@ -68,7 +68,7 @@ const Graphiql = () => {
 
   return (
     <Layout>
-      <div className="flex bg-slate-700">
+      <div className="flex h-[100vhj] bg-slate-700">
         <div
           className={`bg-slate-700 h-[calc(100vh-160px)] w-[57px] border-r border-solid border-gray-500 py-2 px-2`}
         >
@@ -104,8 +104,8 @@ const Graphiql = () => {
           <div
             className={`flex ${
               isEditorOpen
-                ? 'h-[calc(100vh-160px-260px)]'
-                : 'h-[calc(100vh-160px-75px)]'
+                ? 'h-[calc(100vh-160px-35%)]'
+                : 'h-[calc(100vh-160px-10%)]'
             }`}
           >
             <Editor />
@@ -114,8 +114,8 @@ const Graphiql = () => {
           <div
             className={`bg-slate-700 ${
               isEditorOpen
-                ? 'h-[calc(100vh-160px-700px)]'
-                : 'h-[calc(100vh-160px-730px)]'
+                ? 'h-[calc(100vh-160px-70%)]'
+                : 'h-[calc(100vh-160px-95%)]'
             } border-t border-solid border-gray-500 px-2 flex-col py-2`}
           >
             <div className="flex bg-slate-700 justify-between items-center">
@@ -145,7 +145,7 @@ const Graphiql = () => {
               </button>
             </div>
             {isEditorOpen && (
-              <div className="h-[calc(100vh-160px-600px)] w-[100%]">
+              <div className="h-[200px] w-[100%]">
                 <Editor />
               </div>
             )}
