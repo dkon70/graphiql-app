@@ -1,14 +1,14 @@
-import { Button } from '../ui/button';
-
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { Button, buttonVariants } from '../ui/button';
 import { Switch } from '../ui/switch';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase';
+import { signout } from '@/firebase/signOut';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-
-  //TODO delete this line
-  const user = false;
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -28,17 +28,41 @@ const Header = () => {
       data-testid="header"
     >
       <div>
-        <Link href="/">Home</Link>
+        <Link href="/" className="mr-5">
+          Home
+        </Link>
       </div>
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-8">
         <span className="flex items-center gap-2">
           EN
           <Switch />
           RU
         </span>
-        <Button variant="secondary">
-          {user ? 'Sign Out' : 'Login/register'}
-        </Button>
+        {user ? (
+          <Button
+            variant="secondary"
+            onClick={() => {
+              signout();
+            }}
+          >
+            Sign Out
+          </Button>
+        ) : (
+          <span className="flex flex-wrap justify-end gap-1">
+            <Link
+              href={'/login'}
+              className={buttonVariants({ variant: 'secondary', size: 'sm' })}
+            >
+              Login
+            </Link>
+            <Link
+              href={'/register'}
+              className={buttonVariants({ variant: 'secondary', size: 'sm' })}
+            >
+              Register
+            </Link>
+          </span>
+        )}
       </div>
     </header>
   );
