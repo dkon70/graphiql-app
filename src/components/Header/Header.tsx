@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full bg-slate-800 sticky top-0 flex p-5 duration-200 text-white items-center justify-between ${
+      className={`w-full bg-slate-800 sticky z-10 top-0 flex p-5 duration-200 text-white items-center justify-between ${
         isScrolled ? 'pt-2 pb-2' : ''
       }`}
       data-testid="header"

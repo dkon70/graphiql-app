@@ -68,9 +68,9 @@ const Graphiql = () => {
 
   return (
     <Layout>
-      <div className="flex h-[100vhj] bg-slate-700">
+      <div className="flex h-[calc(100vh-160px)] bg-slate-700 max-sm:flex-col max-sm:h-[calc(160vh+105px)]">
         <div
-          className={`bg-slate-700 h-[calc(100vh-160px)] w-[57px] border-r border-solid border-gray-500 py-2 px-2`}
+          className={`bg-slate-700 h-[calc(100vh-160px)] w-[57px] border-r border-solid border-gray-500 py-2 px-2 max-sm:rotate-360 max-sm:h-[60px] max-sm:w-[100%] max-sm:border-r-0 max-sm:border-b`}
         >
           <button
             className={` ${
@@ -90,17 +90,19 @@ const Graphiql = () => {
           </button>
         </div>
         {isDocsOpen && (
-          <div className="w-[500px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5">
+          <div className="w-[500px] max-sm:absolute max-sm:top-[140px] overflow-auto bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
             <h3 className="text-white pl-2 text-3xl">Docs</h3>
           </div>
         )}
         {isUrlOpen && (
-          <div className="w-[500px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5">
+          <div className="w-[500px] max-sm:absolute max-sm:top-[140px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
             <h3 className="text-white pl-2 text-3xl">URL</h3>
-            <EndpointEditor />
+            <div className="w-[90%] max-sm:w-[70%]">
+              <EndpointEditor />
+            </div>
           </div>
         )}
-        <div className="flex-col w-[50%]">
+        <div className="flex-col w-[50%] max-sm:w-full max-sm:h-[calc(100vh-140px)]">
           <div
             className={`flex ${
               isEditorOpen
@@ -145,13 +147,15 @@ const Graphiql = () => {
               </button>
             </div>
             {isEditorOpen && (
-              <div className="h-[200px] w-[100%]">
+              <div className="h-[100%] w-[100%] max-sm:h-[100%]">
                 <Editor />
               </div>
             )}
           </div>
         </div>
-        <div className="w-[50%] h-[calc(100vh-160px)] bg-slate-600"> </div>
+        <div className="w-[50%] h-[calc(100vh-160px)] bg-slate-600 max-sm:w-[100%]">
+          {' '}
+        </div>
       </div>
     </Layout>
   );
