@@ -91,7 +91,7 @@ const Graphiql = () => {
         </div>
         {isDocsOpen && (
           <div className="w-[500px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5">
-            <h3 className="text-white text-3xl">Docs</h3>
+            <h3 className="text-white pl-2 text-3xl">Docs</h3>
           </div>
         )}
         {isUrlOpen && (
