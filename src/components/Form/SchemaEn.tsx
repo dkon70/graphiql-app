@@ -1,16 +1,9 @@
 'use client';
 
-import { TextContentType, textContent } from '@/lib/langText';
+import { textContent } from '@/lib/langText';
 import * as z from 'zod';
 
-let lang = 'en';
-if (typeof window !== 'undefined' && window.localStorage) {
-  const savedLang = localStorage.getItem('lang');
-  if (savedLang) {
-    lang = savedLang;
-  }
-}
-const text = textContent[lang as keyof TextContentType].validation;
+const text = textContent.en.validation;
 
 export const SignInFormSchema = z.object({
   email: z.string().email(),

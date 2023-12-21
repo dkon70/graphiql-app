@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
 import { auth, db } from './index';
-import { SignUpFormData } from '@/components/Form/Schema';
+import { SignUpFormData } from '@/components/Form/SchemaEn';
 
 export const signUp = async ({ username, email, password }: SignUpFormData) => {
   const res = await createUserWithEmailAndPassword(auth, email, password);

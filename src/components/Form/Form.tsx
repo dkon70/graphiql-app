@@ -6,14 +6,15 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormEmailMessage,
+  FormEmailRuMessage,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { SignInFormSchema, SignUpFormSchema } from './Schema';
+import { SignInFormSchema, SignUpFormSchema } from './SchemaEn';
+import { SignInFormRuSchema, SignUpFormRuSchema } from './SchemaRu';
 import { signUp } from '@/firebase/signUp';
 import { signIn } from '@/firebase/signIn';
 import { toast } from '../ui/use-toast';
@@ -37,7 +38,14 @@ export function InputForm({ mode }: { mode: string }) {
         };
 
   type formDataType = typeof defaultdata;
-  const schema = mode === 'signUp' ? SignUpFormSchema : SignInFormSchema;
+  const schema =
+    mode === 'signUp'
+      ? lang === 'en'
+        ? SignUpFormSchema
+        : SignUpFormRuSchema
+      : lang === 'en'
+        ? SignInFormSchema
+        : SignInFormRuSchema;
 
   const form = useForm<formDataType>({
     resolver: zodResolver(schema),
@@ -106,7 +114,7 @@ export function InputForm({ mode }: { mode: string }) {
                     autoComplete="email"
                   />
                 </FormControl>
-                <FormEmailMessage />
+                {lang === 'en' ? <FormMessage /> : <FormEmailRuMessage />}
               </FormItem>
             )}
           />

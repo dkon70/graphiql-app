@@ -165,21 +165,12 @@ const FormMessage = React.forwardRef<
 });
 FormMessage.displayName = 'FormMessage';
 
-let lang = 'en';
-if (typeof window !== 'undefined' && window.localStorage) {
-  const savedLang = localStorage.getItem('lang');
-  if (savedLang) {
-    lang = savedLang;
-  }
-}
-const errorMessage = lang === 'en' ? 'Invalid email' : 'Не корректный e-mail';
-
-const FormEmailMessage = React.forwardRef<
+const FormEmailRuMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField();
-  const body = error ? errorMessage : children;
+  const body = error ? 'Не корректный e-mail' : children;
 
   if (!body) {
     return null;
@@ -196,7 +187,7 @@ const FormEmailMessage = React.forwardRef<
     </p>
   );
 });
-FormEmailMessage.displayName = 'FormEmailMessage';
+FormEmailRuMessage.displayName = 'FormEmailMessage';
 
 export {
   useFormField,
@@ -206,6 +197,6 @@ export {
   FormControl,
   FormDescription,
   FormMessage,
-  FormEmailMessage,
+  FormEmailRuMessage,
   FormField,
 };
