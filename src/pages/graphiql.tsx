@@ -1,4 +1,3 @@
-import Layout from './layout';
 import Editor from '@/components/Editor/Editor';
 import JSONViewerButtons from '@/components/JSONViewerButtons/JSONViewerButtons';
 import upArrow from '../../public/up-arrow.svg';
@@ -67,97 +66,95 @@ const Graphiql = () => {
   };
 
   return (
-    <Layout>
-      <div className="flex h-[calc(100vh-160px)] bg-slate-700 max-sm:flex-col max-sm:h-[calc(160vh+105px)]">
-        <div
-          className={`bg-slate-700 h-[calc(100vh-160px)] w-[57px] border-r border-solid border-gray-500 py-2 px-2 max-sm:rotate-360 max-sm:h-[60px] max-sm:w-[100%] max-sm:border-r-0 max-sm:border-b`}
+    <div className="flex h-[calc(100vh-160px)] bg-slate-700 max-sm:flex-col max-sm:h-[calc(160vh+105px)]">
+      <div
+        className={`bg-slate-700 h-[calc(100vh-160px)] w-[57px] border-r border-solid border-gray-500 py-2 px-2 max-sm:rotate-360 max-sm:h-[60px] max-sm:w-[100%] max-sm:border-r-0 max-sm:border-b`}
+      >
+        <button
+          className={` ${
+            isDocsOpen && 'bg-slate-600'
+          } bg-slate-700 hover:bg-slate-600 rounded mb-1 h-10 w-10 p-1 duration-150`}
+          onClick={docsOpenHandler}
         >
-          <button
-            className={` ${
-              isDocsOpen && 'bg-slate-600'
-            } bg-slate-700 hover:bg-slate-600 rounded mb-1 h-10 w-10 p-1 duration-150`}
-            onClick={docsOpenHandler}
-          >
-            <Image src={docsButton} alt="docs" />
-          </button>
-          <button
-            className={` ${
-              isDocsOpen && 'bg-slate-600'
-            } bg-slate-700 hover:bg-slate-600 rounded h-10 w-10 p-2 duration-150`}
-            onClick={urlOpenHandler}
-          >
-            <Image src={urlButton} alt="url" />
-          </button>
+          <Image src={docsButton} alt="docs" />
+        </button>
+        <button
+          className={` ${
+            isDocsOpen && 'bg-slate-600'
+          } bg-slate-700 hover:bg-slate-600 rounded h-10 w-10 p-2 duration-150`}
+          onClick={urlOpenHandler}
+        >
+          <Image src={urlButton} alt="url" />
+        </button>
+      </div>
+      {isDocsOpen && (
+        <div className="w-[500px] max-sm:absolute max-sm:top-[140px] overflow-auto bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
+          <h3 className="text-white pl-2 text-3xl">Docs</h3>
         </div>
-        {isDocsOpen && (
-          <div className="w-[500px] max-sm:absolute max-sm:top-[140px] overflow-auto bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
-            <h3 className="text-white pl-2 text-3xl">Docs</h3>
+      )}
+      {isUrlOpen && (
+        <div className="w-[500px] max-sm:absolute max-sm:top-[140px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
+          <h3 className="text-white pl-2 text-3xl">URL</h3>
+          <div className="w-[90%] max-sm:w-[70%]">
+            <EndpointEditor />
           </div>
-        )}
-        {isUrlOpen && (
-          <div className="w-[500px] max-sm:absolute max-sm:top-[140px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
-            <h3 className="text-white pl-2 text-3xl">URL</h3>
-            <div className="w-[90%] max-sm:w-[70%]">
-              <EndpointEditor />
-            </div>
-          </div>
-        )}
-        <div className="flex-col w-[50%] max-sm:w-full max-sm:h-[calc(100vh-140px)]">
-          <div
-            className={`flex ${
-              isEditorOpen
-                ? 'h-[calc(100vh-160px-35%)]'
-                : 'h-[calc(100vh-160px-10%)]'
-            }`}
-          >
-            <Editor />
-            <JSONViewerButtons />
-          </div>
-          <div
-            className={`bg-slate-700 ${
-              isEditorOpen
-                ? 'h-[calc(100vh-160px-70%)]'
-                : 'h-[calc(100vh-160px-95%)]'
-            } border-t border-solid border-gray-500 px-2 flex-col py-2`}
-          >
-            <div className="flex bg-slate-700 justify-between items-center">
-              <div className="flex justify-between w-[20%]">
-                <button
-                  className={`bg-slate-700 ${
-                    isVariablesOpen ? 'text-white' : 'text-gray-300'
-                  } hover:bg-slate-600 px-2 py-1 rounded duration-150`}
-                  onClick={variablesButtonHandler}
-                >
-                  Variables
-                </button>
-                <button
-                  className={`bg-slate-700 ${
-                    isHeadersOpen ? 'text-white' : 'text-gray-300'
-                  } hover:bg-slate-600 px-2 py-1 rounded duration-150`}
-                  onClick={headersButtonHandler}
-                >
-                  Headers
-                </button>
-              </div>
+        </div>
+      )}
+      <div className="flex-col w-[50%] max-sm:w-full max-sm:h-[calc(100vh-140px)]">
+        <div
+          className={`flex ${
+            isEditorOpen
+              ? 'h-[calc(100vh-160px-35%)]'
+              : 'h-[calc(100vh-160px-10%)]'
+          }`}
+        >
+          <Editor />
+          <JSONViewerButtons />
+        </div>
+        <div
+          className={`bg-slate-700 ${
+            isEditorOpen
+              ? 'h-[calc(100vh-160px-70%)]'
+              : 'h-[calc(100vh-160px-95%)]'
+          } border-t border-solid border-gray-500 px-2 flex-col py-2`}
+        >
+          <div className="flex bg-slate-700 justify-between items-center">
+            <div className="flex justify-between w-[20%]">
               <button
-                onClick={arrowClickHandler}
-                className="bg-slate-700 w-10 h-10 hover:bg-slate-600 duration-150 p-1 rounded"
+                className={`bg-slate-700 ${
+                  isVariablesOpen ? 'text-white' : 'text-gray-300'
+                } hover:bg-slate-600 px-2 py-1 rounded duration-150`}
+                onClick={variablesButtonHandler}
               >
-                <Image src={isEditorOpen ? downArrow : upArrow} alt="Arrow" />
+                Variables
+              </button>
+              <button
+                className={`bg-slate-700 ${
+                  isHeadersOpen ? 'text-white' : 'text-gray-300'
+                } hover:bg-slate-600 px-2 py-1 rounded duration-150`}
+                onClick={headersButtonHandler}
+              >
+                Headers
               </button>
             </div>
-            {isEditorOpen && (
-              <div className="h-[100%] w-[100%] max-sm:h-[100%]">
-                <Editor />
-              </div>
-            )}
+            <button
+              onClick={arrowClickHandler}
+              className="bg-slate-700 w-10 h-10 hover:bg-slate-600 duration-150 p-1 rounded"
+            >
+              <Image src={isEditorOpen ? downArrow : upArrow} alt="Arrow" />
+            </button>
           </div>
-        </div>
-        <div className="w-[50%] h-[calc(100vh-160px)] bg-slate-600 max-sm:w-[100%]">
-          {' '}
+          {isEditorOpen && (
+            <div className="h-[100%] w-[100%] max-sm:h-[100%]">
+              <Editor />
+            </div>
+          )}
         </div>
       </div>
-    </Layout>
+      <div className="w-[50%] h-[calc(100vh-160px)] bg-slate-600 max-sm:w-[100%]">
+        {' '}
+      </div>
+    </div>
   );
 };
 
