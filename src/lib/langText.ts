@@ -66,6 +66,17 @@ type Validation = {
   username: string;
 };
 
+type Dashboard = {
+  docs: string;
+  url: {
+    title: string;
+    edit: string;
+    save: string;
+  };
+  variables: string;
+  headers: string;
+};
+
 type langText = {
   header: Header;
   welcome: Welcome;
@@ -79,6 +90,7 @@ type langText = {
   authPage: AuthPage;
   notFound: NotFound;
   validation: Validation;
+  dashboard: Dashboard;
 };
 
 export const enText: langText = {
@@ -157,6 +169,16 @@ export const enText: langText = {
     },
     username: 'Username must be at least 2 characters.',
   },
+  dashboard: {
+    docs: 'DOCS',
+    url: {
+      title: 'URL',
+      edit: 'Edit',
+      save: 'Save',
+    },
+    variables: 'Variables',
+    headers: 'Headers',
+  },
 };
 
 export const ruText: langText = {
@@ -234,6 +256,16 @@ export const ruText: langText = {
       symbol: `Пароль должен содержать специальный символ: ,."'!@#$%^&*()_+=-`,
     },
     username: 'Имя пользователя должно содержать не менее 2 символов.',
+  },
+  dashboard: {
+    docs: 'Документация',
+    url: {
+      title: 'URL адрес',
+      edit: 'Редактировать',
+      save: 'Сохранить',
+    },
+    variables: 'Переменные',
+    headers: 'Заголовки',
   },
 };
 
