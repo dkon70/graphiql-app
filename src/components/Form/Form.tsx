@@ -13,8 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { SignInFormSchema, SignUpFormSchema } from './SchemaEn';
-import { SignInFormRuSchema, SignUpFormRuSchema } from './SchemaRu';
+import { makeSchema } from './Schema';
 import { signUp } from '@/firebase/signUp';
 import { signIn } from '@/firebase/signIn';
 import { toast } from '../ui/use-toast';
@@ -23,7 +22,7 @@ import { TextContentType, textContent } from '@/lib/langText';
 
 export function InputForm({ mode }: { mode: string }) {
   const { lang } = useLang();
-  const text = textContent[lang as keyof TextContentType].authPage;
+  const text = textContent[lang as keyof TextContentType];
 
   const defaultdata =
     mode === 'signUp'
@@ -38,14 +37,7 @@ export function InputForm({ mode }: { mode: string }) {
         };
 
   type formDataType = typeof defaultdata;
-  const schema =
-    mode === 'signUp'
-      ? lang === 'en'
-        ? SignUpFormSchema
-        : SignUpFormRuSchema
-      : lang === 'en'
-        ? SignInFormSchema
-        : SignInFormRuSchema;
+  const schema = makeSchema(text.validation, mode);
 
   const form = useForm<formDataType>({
     resolver: zodResolver(schema),
@@ -61,14 +53,14 @@ export function InputForm({ mode }: { mode: string }) {
       }
       toast({
         variant: 'success',
-        title: text.toast.title,
-        description: text.toast.description,
+        title: text.authPage.toast.title,
+        description: text.authPage.toast.description,
       });
     } catch (err) {
       if (err instanceof Error) {
         toast({
           variant: 'destructive',
-          title: text.toast.error,
+          title: text.authPage.toast.error,
           description: err.message,
         });
       }
@@ -78,7 +70,9 @@ export function InputForm({ mode }: { mode: string }) {
   return (
     <div className="w-80 lg:w-96 p-5 overflow-y-auto">
       <h1 className="font-bold text-xl mb-5">
-        {mode === 'signUp' ? text.title.register : text.title.login}
+        {mode === 'signUp'
+          ? text.authPage.title.register
+          : text.authPage.title.login}
       </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -88,10 +82,10 @@ export function InputForm({ mode }: { mode: string }) {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{text.usernameLabel}</FormLabel>
+                  <FormLabel>{text.authPage.usernameLabel}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder={text.usernamePlaceholder}
+                      placeholder={text.authPage.usernamePlaceholder}
                       {...field}
                       autoComplete="username"
                     />
@@ -106,10 +100,10 @@ export function InputForm({ mode }: { mode: string }) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{text.emailLabel}</FormLabel>
+                <FormLabel>{text.authPage.emailLabel}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder={text.emailPlaceholder}
+                    placeholder={text.authPage.emailPlaceholder}
                     {...field}
                     autoComplete="email"
                   />
@@ -123,11 +117,11 @@ export function InputForm({ mode }: { mode: string }) {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{text.passwordLabel}</FormLabel>
+                <FormLabel>{text.authPage.passwordLabel}</FormLabel>
                 <FormControl>
                   <Input
                     type="password"
-                    placeholder={text.passwordPlaceholder}
+                    placeholder={text.authPage.passwordPlaceholder}
                     {...field}
                     autoComplete={
                       mode === 'signUp' ? 'new-password' : 'current-password'
@@ -138,7 +132,7 @@ export function InputForm({ mode }: { mode: string }) {
               </FormItem>
             )}
           />
-          <Button type="submit">{text.submitButton}</Button>
+          <Button type="submit">{text.authPage.submitButton}</Button>
         </form>
       </Form>
     </div>

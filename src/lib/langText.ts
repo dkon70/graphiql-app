@@ -55,7 +55,7 @@ type NotFound = {
   homeButton: string;
 };
 
-type Validation = {
+export type Validation = {
   password: {
     min: string;
     max: string;
@@ -111,7 +111,7 @@ export const enText: langText = {
     text: 'Welcome to our GraphQL-powered website! Here you can explore the amazing world of the Rick and Morty API using GraphQL. Discover information about your favorite characters, episodes, and more. Get ready for an exciting journey through the multiverse!',
     login: 'Login',
     register: 'Register',
-    dashboard: 'Dashboard',
+    dashboard: 'Main Page',
   },
   team: {
     aboutTeam: {
@@ -199,7 +199,7 @@ export const ruText: langText = {
     text: 'Добро пожаловать на наш сайт, работающий на GraphQL! Здесь вы можете познакомиться с удивительным миром API Рика и Морти с помощью GraphQL. Откройте для себя информацию о любимых персонажах, эпизодах и многом другом. Приготовьтесь к захватывающему путешествию по мультивселенной!',
     login: 'Войти',
     register: 'Зарегистрироваться',
-    dashboard: 'GraphQl панель',
+    dashboard: 'Главная страница',
   },
   team: {
     aboutTeam: {
