@@ -5,10 +5,10 @@ import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <ErrorBoundary>
+    <ErrorBoundary>
+      <Layout>
         <Component {...pageProps} />
-      </ErrorBoundary>
-    </Layout>
+      </Layout>
+    </ErrorBoundary>
   );
 }

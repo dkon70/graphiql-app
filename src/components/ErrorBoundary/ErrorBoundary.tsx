@@ -16,7 +16,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.state = { hasError: false, error: null };
   }
 
-  getDerivedStateFromError(error: Error) {
+  static getDerivedStateFromError(error: Error) {
     return { hasError: true, error: error };
   }
 
@@ -32,7 +32,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="h-[calc(100vh-156px)] w-[100vw] flex justify-center items-center bg-slate-600 flex-col gap-5">
+        <div className="h-[100vh] w-[100vw] flex justify-center items-center bg-slate-600 flex-col gap-5">
           <h1 className="text-white text-3xl">
             Oops... something went wrong...
           </h1>
