@@ -28,11 +28,7 @@ const Graphiql = () => {
   }, [user, loading, router]);
 
   const arrowClickHandler = () => {
-    if (isEditorOpen) {
-      setIsEditorOpen(false);
-    } else {
-      setIsEditorOpen(true);
-    }
+    setIsEditorOpen(!isEditorOpen);
   };
 
   const variablesButtonHandler = () => {
@@ -53,11 +49,7 @@ const Graphiql = () => {
 
   const docsOpenHandler = () => {
     if (!isUrlOpen) {
-      if (isDocsOpen) {
-        setDocsOpen(false);
-      } else {
-        setDocsOpen(true);
-      }
+      setDocsOpen(!isDocsOpen);
     } else {
       setUrlOpen(false);
       setDocsOpen(true);
@@ -66,11 +58,7 @@ const Graphiql = () => {
 
   const urlOpenHandler = () => {
     if (!isDocsOpen) {
-      if (isUrlOpen) {
-        setUrlOpen(false);
-      } else {
-        setUrlOpen(true);
-      }
+      setUrlOpen(!isUrlOpen);
     } else {
       setDocsOpen(false);
       setUrlOpen(true);
@@ -78,9 +66,9 @@ const Graphiql = () => {
   };
 
   return (
-    <div className="flex h-[calc(100vh-156px)] bg-slate-700 max-sm:flex-col max-sm:h-full">
+    <div className="flex h-[calc(100vh-160px)] bg-slate-700 max-sm:flex-col max-sm:h-full">
       <div
-        className={`bg-slate-700 h-[calc(100vh-156px)] w-[57px] border-r border-solid border-gray-500 py-2 px-2 max-sm:rotate-360 max-sm:h-[60px] max-sm:w-[100%] max-sm:border-r-0 max-sm:border-b`}
+        className={`bg-slate-700 h-[calc(100vh-160px)] w-[57px] border-r border-solid border-gray-500 py-2 px-2 max-sm:rotate-360 max-sm:h-[60px] max-sm:w-[100%] max-sm:border-r-0 max-sm:border-b`}
       >
         <button
           className={` ${
@@ -116,8 +104,8 @@ const Graphiql = () => {
         <div
           className={`flex ${
             isEditorOpen
-              ? 'h-[calc(100vh-156px-35%)]'
-              : 'h-[calc(100vh-156px-10%)]'
+              ? 'h-[calc(100vh-160px-35%)]'
+              : 'h-[calc(100vh-160px-15%)]'
           }`}
         >
           <Editor />
@@ -126,8 +114,8 @@ const Graphiql = () => {
         <div
           className={`bg-slate-700 ${
             isEditorOpen
-              ? 'h-[calc(100vh-156px-70%)]'
-              : 'h-[calc(100vh-156px-95%)]'
+              ? 'h-[calc(100vh-160px-75%)]'
+              : 'h-[calc(100vh-160px-95%)]'
           } border-t border-solid border-gray-500 px-2 flex-col py-2`}
         >
           <div className="flex bg-slate-700 justify-between items-center">
@@ -163,7 +151,7 @@ const Graphiql = () => {
           )}
         </div>
       </div>
-      <div className="w-[50%] h-[calc(100vh-156px)] bg-slate-600 max-sm:w-[100%]">
+      <div className="w-[50%] h-[calc(100vh-160px)] bg-slate-600 max-sm:w-[100%]">
         {' '}
       </div>
     </div>
