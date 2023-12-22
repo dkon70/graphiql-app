@@ -2,18 +2,30 @@ import Editor from '@/components/Editor/Editor';
 import JSONViewerButtons from '@/components/JSONViewerButtons/JSONViewerButtons';
 import upArrow from '../../public/up-arrow.svg';
 import downArrow from '../../public/down-arrow.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import docsButton from '../../public/docs.svg';
 import EndpointEditor from '@/components/EndpointEditor/EndpointEditor';
 import urlButton from '../../public/url.svg';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase';
+import { useRouter } from 'next/router';
 
 const Graphiql = () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isVariablesOpen, setVariablesOpen] = useState(false);
   const [isHeadersOpen, setHeadersOpen] = useState(false);
   const [isDocsOpen, setDocsOpen] = useState(false);
-  const [isUrlOpen, setUrlOpne] = useState(false);
+  const [isUrlOpen, setUrlOpen] = useState(false);
+  const router = useRouter();
+
+  const [user, loading] = useAuthState(auth);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/');
+    }
+  }, [user, loading, router]);
 
   const arrowClickHandler = () => {
     if (isEditorOpen) {
@@ -47,7 +59,7 @@ const Graphiql = () => {
         setDocsOpen(true);
       }
     } else {
-      setUrlOpne(false);
+      setUrlOpen(false);
       setDocsOpen(true);
     }
   };
@@ -55,13 +67,13 @@ const Graphiql = () => {
   const urlOpenHandler = () => {
     if (!isDocsOpen) {
       if (isUrlOpen) {
-        setUrlOpne(false);
+        setUrlOpen(false);
       } else {
-        setUrlOpne(true);
+        setUrlOpen(true);
       }
     } else {
       setDocsOpen(false);
-      setUrlOpne(true);
+      setUrlOpen(true);
     }
   };
 
