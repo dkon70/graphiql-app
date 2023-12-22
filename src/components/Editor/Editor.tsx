@@ -54,7 +54,7 @@ const Editor = () => {
         ))}
       </div>
       <textarea
-        name='editor'
+        name="editor"
         ref={textareaRef}
         value={textareaValue}
         className="resize-none w-[100%] pr-10 outline-none overflow-x-auto whitespace-pre text-white bg-slate-700 mb-1"
