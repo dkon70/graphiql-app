@@ -46,7 +46,12 @@ const Footer = () => {
       </section>
       <section data-testid="section">
         <Link href="https://rs.school/react/">
-          <Image src={rsLogo} alt="rs-logo" className="w-max h-10 rounded-sm" />
+          <Image
+            src={rsLogo}
+            alt="rs-logo"
+            className="w-max h-10 rounded-sm"
+            priority={true}
+          />
         </Link>
       </section>
     </footer>
