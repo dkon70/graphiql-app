@@ -5,31 +5,12 @@ import dev2 from 'src/images/dev2.png';
 import dev3 from 'src/images/dev3.png';
 import { Separator } from '@/components/ui/separator';
 import { useLang } from '@/lib/langContext';
-import { TextContentType, textContent } from '@/lib/langText';
+import { TextContentType, textContent, Members } from '@/lib/langText';
 
 const AboutSection = () => {
   const { lang } = useLang();
   const text = textContent[lang as keyof TextContentType].team;
-  const cards = [
-    {
-      id: 1,
-      photo: dev1,
-      name: text.ourTeam[1].name,
-      description: text.ourTeam[1].description,
-    },
-    {
-      id: 2,
-      photo: dev2,
-      name: text.ourTeam[2].name,
-      description: text.ourTeam[2].description,
-    },
-    {
-      id: 3,
-      photo: dev3,
-      name: text.ourTeam[3].name,
-      description: text.ourTeam[3].description,
-    },
-  ];
+  const photos = [dev1, dev2, dev3];
 
   return (
     <section className="py-8">
@@ -43,12 +24,14 @@ const AboutSection = () => {
           {text.ourTeam.title}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {cards.map((card) => (
+          {photos.map((photo, ind) => (
             <Card
-              key={card.id}
-              photo={card.photo}
-              name={card.name}
-              description={card.description}
+              key={ind + 1}
+              photo={photo}
+              name={text.ourTeam.members[(ind + 1) as keyof Members].name}
+              description={
+                text.ourTeam.members[(ind + 1) as keyof Members].description
+              }
             />
           ))}
         </div>
