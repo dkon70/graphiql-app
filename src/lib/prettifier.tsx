@@ -41,14 +41,14 @@ export function prettifyText(text: string) {
   for (let i = 0; i < list.length; i++) {
     const el = list[i];
     if ('{}()[]'.includes(el)) {
-      const elAmount = bracketsCount[el as keyof BracketsCountType]++;
+      const elAmount = ++bracketsCount[el as keyof BracketsCountType];
       const elPair = bracketsPairs[el as keyof BracketsPairsType];
       dif = Math.abs(elAmount - bracketsCount[elPair]);
       if (i === 0 && el === '{') {
         totalList.push(el + '\n' + '  '.repeat(1));
       } else if ('})]'.includes(el)) {
         if (elAmount - bracketsCount[elPair] > 0) {
-          return false;
+          return null;
         }
         el === '}'
           ? totalList.push(
@@ -67,8 +67,9 @@ export function prettifyText(text: string) {
     }
   }
 
-  let total = totalList.join('').replace(/\s*:\s*/g, ': ');
-  total = total.replace(/\s*\,/, ',');
-  total = total.replace(/}\s*}/g, '}\n}');
-  return total;
+  return totalList
+    .join('')
+    .replace(/\s*:\s*/g, ': ')
+    .replace(/\s*\,/, ',')
+    .replace(/}\s*}/g, '}\n}');
 }
