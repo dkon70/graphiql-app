@@ -24,11 +24,15 @@ type TeamMemder = {
   description: string;
 };
 
-type OurTeam = {
-  title: string;
+export type Members = {
   1: TeamMemder;
   2: TeamMemder;
   3: TeamMemder;
+};
+
+type OurTeam = {
+  title: string;
+  members: Members;
 };
 
 type AuthPage = {
@@ -120,20 +124,22 @@ export const enText: langText = {
     },
     ourTeam: {
       title: 'Our Team',
-      '1': {
-        name: 'Dmitry Konev',
-        description:
-          "Aspiring web developer diving into the world of React. Eager to learn and create interactive user interfaces. Let's code! 🚀",
-      },
-      '2': {
-        name: 'Natalia Lebedeva',
-        description:
-          'Natalia has a higher education in construction, but has been interested in programming all her life. She started her path in IT with Python and machine learning, and then got acquainted with web development and realized that she had found her direction. Now she does what she is really interested in, what energizes and inspires her.',
-      },
-      '3': {
-        name: 'Nikita Starmoussov',
-        description:
-          "Nikita, another of our promising junior frontend developers, is the embodiment of ambition and skill. Young yet incredibly adept, his drive to be the best is palpable in every task he undertakes.. Every line of code he writes echoes his dedication and eagerness to excel. With such passion, there's no doubt that the sky's the limit for him in the tech world.",
+      members: {
+        '1': {
+          name: 'Dmitry Konev',
+          description:
+            "Aspiring web developer diving into the world of React. Eager to learn and create interactive user interfaces. Let's code! 🚀",
+        },
+        '2': {
+          name: 'Natalia Lebedeva',
+          description:
+            'Natalia has a higher education in construction, but has been interested in programming all her life. She started her path in IT with Python and machine learning, and then got acquainted with web development and realized that she had found her direction. Now she does what she is really interested in, what energizes and inspires her.',
+        },
+        '3': {
+          name: 'Nikita Starmoussov',
+          description:
+            "Nikita, another of our promising junior frontend developers, is the embodiment of ambition and skill. Young yet incredibly adept, his drive to be the best is palpable in every task he undertakes.. Every line of code he writes echoes his dedication and eagerness to excel. With such passion, there's no doubt that the sky's the limit for him in the tech world.",
+        },
       },
     },
   },
@@ -208,20 +214,22 @@ export const ruText: langText = {
     },
     ourTeam: {
       title: 'Наша команда',
-      '1': {
-        name: 'Дмитрий Конев',
-        description:
-          'Начинающий веб-разработчик, погружающийся в мир React. Жаждет учиться и создавать интерактивные пользовательские интерфейсы. Давайте кодить! 🚀',
-      },
-      '2': {
-        name: 'Наталья Лебедева',
-        description:
-          'Наталья получила высшее строительное образование, но всю жизнь интересовалась программированием. Свой путь в IT она начала с Python и машинного обучения, а затем познакомилась с веб-разработкой и поняла, что нашла свое направление. Теперь она занимается тем, что ей действительно интересно, что ее заряжает и вдохновляет.',
-      },
-      '3': {
-        name: 'Никита Стармоуссов',
-        description:
-          'Никита, еще один из наших перспективных младших фронтенд-разработчиков, - воплощение амбиций и мастерства. Молодой, но невероятно опытный, его стремление быть лучшим ощущается в каждой задаче, за которую он берется. Каждая строчка кода, которую он пишет, отражает его преданность и стремление к совершенству. С такой страстью можно не сомневаться, что в мире технологий для него открываются новые горизонты.',
+      members: {
+        '1': {
+          name: 'Дмитрий Конев',
+          description:
+            'Начинающий веб-разработчик, погружающийся в мир React. Жаждет учиться и создавать интерактивные пользовательские интерфейсы. Давайте кодить! 🚀',
+        },
+        '2': {
+          name: 'Наталья Лебедева',
+          description:
+            'Наталья получила высшее строительное образование, но всю жизнь интересовалась программированием. Свой путь в IT она начала с Python и машинного обучения, а затем познакомилась с веб-разработкой и поняла, что нашла свое направление. Теперь она занимается тем, что ей действительно интересно, что ее заряжает и вдохновляет.',
+        },
+        '3': {
+          name: 'Никита Стармоуссов',
+          description:
+            'Никита, еще один из наших перспективных младших фронтенд-разработчиков, - воплощение амбиций и мастерства. Молодой, но невероятно опытный, его стремление быть лучшим ощущается в каждой задаче, за которую он берется. Каждая строчка кода, которую он пишет, отражает его преданность и стремление к совершенству. С такой страстью можно не сомневаться, что в мире технологий для него открываются новые горизонты.',
+        },
       },
     },
   },
