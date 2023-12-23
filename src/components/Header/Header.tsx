@@ -40,6 +40,7 @@ const Header = () => {
         <span className="flex items-center gap-2">
           {text.en}
           <Switch
+            name="switcher"
             data-testid="switch-lang"
             onClick={switchLang}
             checked={lang === 'en' ? false : true}
