@@ -5,9 +5,13 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
+import { useLang } from '@/lib/langContext';
+import { TextContentType, textContent } from '@/lib/langText';
 
 export default function WelcomeButtons() {
   const [user, loading, error] = useAuthState(auth);
+  const { lang } = useLang();
+  const text = textContent[lang as keyof TextContentType].welcome;
 
   return (
     <>
@@ -17,7 +21,7 @@ export default function WelcomeButtons() {
         <p>Loading...</p>
       ) : user ? (
         <Link href={'/main'} className={buttonVariants()}>
-          Dashboard
+          {text.dashboard}
         </Link>
       ) : (
         <div className="flex space-x-4 my-6">
@@ -25,10 +29,10 @@ export default function WelcomeButtons() {
             href={'/login'}
             className={cn(buttonVariants(), 'py-4 px-6 text-sm')}
           >
-            Login
+            {text.login}
           </Link>
           <Link href={'/register'} className={buttonVariants()}>
-            Register
+            {text.register}
           </Link>
         </div>
       )}
