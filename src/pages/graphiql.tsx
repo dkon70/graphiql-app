@@ -10,6 +10,9 @@ import urlButton from '../../public/url.svg';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { useRouter } from 'next/router';
+import { AppDispatch } from '@/lib/store/store';
+import { useDispatch } from 'react-redux';
+import { fetchData } from '@/lib/store/slices';
 
 const Graphiql = () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -20,6 +23,10 @@ const Graphiql = () => {
   const router = useRouter();
 
   const [user, loading] = useAuthState(auth);
+
+  const dispatch = useDispatch<AppDispatch>();
+  console.log('before dispatch');
+  dispatch(fetchData());
 
   useEffect(() => {
     if (!loading && !user) {
@@ -152,7 +159,7 @@ const Graphiql = () => {
         </div>
       </div>
       <div className="w-[50%] h-[calc(100vh-160px)] bg-slate-600 max-sm:w-[100%]">
-        {' '}
+        {'right side'}
       </div>
     </div>
   );

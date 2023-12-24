@@ -1,15 +1,22 @@
+import { setQuery } from '@/lib/store/slices';
+import { AppDispatch, RootState } from '@/lib/store/store';
 import React, { useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Editor = () => {
   const [lines, setLines] = useState([1]);
-  const [textareaValue, setTextareaValue] = useState('');
+  const [textareaValue, setTextareaValue] = useState(
+    useSelector((state: RootState) => state.data.query)
+  );
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const lineNumbersRef = useRef<HTMLDivElement | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
 
   const linesHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaValue(event.target.value);
     const totalLines = event.target.value.split('\n').length;
     setLines([...Array(totalLines).keys()].map((index) => index + 1));
+    dispatch(setQuery(event.target.value));
   };
 
   const handleTabs = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
