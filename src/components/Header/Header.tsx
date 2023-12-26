@@ -33,7 +33,13 @@ const Header = () => {
       data-testid="header"
     >
       <Link href="/">
-        <Image src="/home.svg" width={100} height={100} alt="Logo" />
+        <Image
+          src="/home.svg"
+          width={100}
+          height={40}
+          alt="Logo"
+          style={{ width: 100, height: 40 }}
+        />
       </Link>
 
       <div className="flex items-center gap-8 pl-4">
