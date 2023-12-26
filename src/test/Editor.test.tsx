@@ -8,7 +8,9 @@ describe('Editor component tests', () => {
     render(<Editor />);
     expect(screen.getByText('1')).toBeInTheDocument();
     const textarea = screen.getByTestId('textarea');
-    fireEvent.change(textarea, { target: { value: 'Line 1\nLine 2\nLine 3' } });
+    fireEvent.change(textarea, {
+      target: { value: 'Line one\nLine two\nLine three' },
+    });
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
     expect(screen.getByText('3')).toBeInTheDocument();

@@ -6,18 +6,24 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
+  FormEmailRuMessage,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { SignInFormSchema, SignUpFormSchema } from './Schema';
+import { makeSchema } from './Schema';
 import { signUp } from '@/firebase/signUp';
 import { signIn } from '@/firebase/signIn';
 import { toast } from '../ui/use-toast';
+import { useLang } from '@/lib/langContext';
+import { TextContentType, textContent } from '@/lib/langText';
 
 export function InputForm({ mode }: { mode: string }) {
+  const { lang } = useLang();
+  const text = textContent[lang as keyof TextContentType];
+
   const defaultdata =
     mode === 'signUp'
       ? {
@@ -31,7 +37,7 @@ export function InputForm({ mode }: { mode: string }) {
         };
 
   type formDataType = typeof defaultdata;
-  const schema = mode === 'signUp' ? SignUpFormSchema : SignInFormSchema;
+  const schema = makeSchema(text.validation, mode);
 
   const form = useForm<formDataType>({
     resolver: zodResolver(schema),
@@ -47,14 +53,14 @@ export function InputForm({ mode }: { mode: string }) {
       }
       toast({
         variant: 'success',
-        title: 'Success',
-        description: 'You are successfully authorized',
+        title: text.authPage.toast.title,
+        description: text.authPage.toast.description,
       });
     } catch (err) {
       if (err instanceof Error) {
         toast({
           variant: 'destructive',
-          title: 'Error',
+          title: text.authPage.toast.error,
           description: err.message,
         });
       }
@@ -62,9 +68,11 @@ export function InputForm({ mode }: { mode: string }) {
   }
 
   return (
-    <div className="w-80 lg:w-96 p-5">
+    <div className="w-80 lg:w-96 p-5 overflow-y-auto">
       <h1 className="font-bold text-xl mb-5">
-        {mode === 'signUp' ? 'Registration' : 'Authorization'}
+        {mode === 'signUp'
+          ? text.authPage.title.register
+          : text.authPage.title.login}
       </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -74,10 +82,10 @@ export function InputForm({ mode }: { mode: string }) {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>{text.authPage.usernameLabel}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Your name"
+                      placeholder={text.authPage.usernamePlaceholder}
                       {...field}
                       autoComplete="username"
                     />
@@ -92,15 +100,15 @@ export function InputForm({ mode }: { mode: string }) {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>E-mail</FormLabel>
+                <FormLabel>{text.authPage.emailLabel}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Your e-mail"
+                    placeholder={text.authPage.emailPlaceholder}
                     {...field}
                     autoComplete="email"
                   />
                 </FormControl>
-                <FormMessage />
+                {lang === 'en' ? <FormMessage /> : <FormEmailRuMessage />}
               </FormItem>
             )}
           />
@@ -109,11 +117,11 @@ export function InputForm({ mode }: { mode: string }) {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{text.authPage.passwordLabel}</FormLabel>
                 <FormControl>
                   <Input
                     type="password"
-                    placeholder="Your password"
+                    placeholder={text.authPage.passwordPlaceholder}
                     {...field}
                     autoComplete={
                       mode === 'signUp' ? 'new-password' : 'current-password'
@@ -124,7 +132,7 @@ export function InputForm({ mode }: { mode: string }) {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit">{text.authPage.submitButton}</Button>
         </form>
       </Form>
     </div>

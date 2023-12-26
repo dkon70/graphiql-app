@@ -13,7 +13,7 @@ export default function RegisterPage() {
 
   return (
     <>
-      <main className="w-full h-[calc(100vh-160px)] flex flex-col justify-center items-center">
+      <main className="w-full h-[calc(100vh-160px)] p-3 flex flex-col justify-center items-center">
         {error ? (
           <h1>error.message</h1>
         ) : loading ? (

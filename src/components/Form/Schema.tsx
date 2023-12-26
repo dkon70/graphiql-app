@@ -1,33 +1,36 @@
 'use client';
 
+import { Validation } from '@/lib/langText';
 import * as z from 'zod';
 
-export const SignInFormSchema = z.object({
-  email: z.string().email(),
-  password: z
-    .string()
-    .min(8, {
-      message: 'Password must be at least 8 characters.',
-    })
-    .max(32, {
-      message: 'Password must be at least 2 characters.',
-    })
-    .regex(/[a-zA-Z]/, {
-      message: 'Password must contain a latin letter',
-    })
-    .regex(/[0-9]/, {
-      message: 'Password must contain a number',
-    })
-    .regex(/[,."'!@#$%^&*()_+=-]/, {
-      message: `Password must contain a special character: ,."'!@#$%^&*()_+=-`,
-    }),
-});
-
-export const SignUpFormSchema = SignInFormSchema.extend({
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-});
-
-export type SignInFormData = z.infer<typeof SignInFormSchema>;
-export type SignUpFormData = z.infer<typeof SignUpFormSchema>;
+export function makeSchema(text: Validation, mode: string) {
+  const schema = z.object({
+    email: z.string().email(),
+    password: z
+      .string()
+      .min(8, {
+        message: text.password.min,
+      })
+      .max(32, {
+        message: text.password.max,
+      })
+      .regex(/[a-zA-Z]/, {
+        message: text.password.latin,
+      })
+      .regex(/[0-9]/, {
+        message: text.password.number,
+      })
+      .regex(/[,."'!@#$%^&*()_+=-]/, {
+        message: text.password.symbol,
+      }),
+  });
+  if (mode === 'signUp') {
+    const upSchema = schema.extend({
+      username: z.string().min(2, {
+        message: text.username,
+      }),
+    });
+    return upSchema;
+  }
+  return schema;
+}
