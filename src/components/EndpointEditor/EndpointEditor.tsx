@@ -1,11 +1,15 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../ui/button';
 import { useState } from 'react';
+import { AppDispatch, RootState } from '@/lib/store/store';
+import { setUrl } from '@/lib/store/slices';
 
 const EndpointEditor = () => {
   const [isEditing, setEditing] = useState(false);
-  const [inputValue, setInputValue] = useState(
-    'https://rickandmortyapi.com/graphql'
-  );
+  const inputValue = useSelector(
+    (state: RootState) => state.data.apiUrl
+    )
+    const dispatch = useDispatch<AppDispatch>();
   return (
     <div className="flex items-center">
       {!isEditing ? (
@@ -16,7 +20,7 @@ const EndpointEditor = () => {
         <input
           className="pl-2 mr-5 w-[15vw] h-[40px] bg-white rounded text-black outline-none max-sm:w-full"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => dispatch(setUrl(e.target.value))}
         />
       )}
       <Button
