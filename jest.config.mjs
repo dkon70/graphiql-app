@@ -9,10 +9,7 @@ const createJestConfig = nextJest({
 const config = {
   testEnvironment: 'jest-environment-jsdom',
   coverageReporters: ['text', 'lcov', 'clover'],
-  collectCoverageFrom: [
-    'src/**/*.ts', 
-    'src/**/*.tsx', 
-  ],
+  collectCoverageFrom: ['src/**/*.ts', 'src/**/*.tsx'],
   coverageDirectory: path.join(process.cwd(), 'coverage'),
 };
 

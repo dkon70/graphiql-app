@@ -166,4 +166,3 @@ const Graphiql = () => {
 };
 
 export default Graphiql;
-

@@ -9,7 +9,6 @@ const JSONViewerButtons = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   async function onClickFetch() {
-    console.log('before dispatch');
     dispatch(fetchData());
   }
 

@@ -8,10 +8,8 @@ import { setUrl } from '@/lib/store/slices';
 
 const EndpointEditor = () => {
   const [isEditing, setEditing] = useState(false);
-  const inputValue = useSelector(
-    (state: RootState) => state.data.apiUrl
-    )
-    const dispatch = useDispatch<AppDispatch>();
+  const inputValue = useSelector((state: RootState) => state.data.apiUrl);
+  const dispatch = useDispatch<AppDispatch>();
   const { lang } = useLang();
   const text = textContent[lang as keyof TextContentType].dashboard;
 

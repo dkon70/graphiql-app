@@ -11,11 +11,16 @@ import { auth } from '@/firebase';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/lib/store/store';
-import CodeMirror from "@uiw/react-codemirror";
-import {duotoneDark } from "@uiw/codemirror-theme-duotone";
+import CodeMirror from '@uiw/react-codemirror';
+import { duotoneDark } from '@uiw/codemirror-theme-duotone';
 import { javascript } from '@codemirror/lang-javascript';
-import { json} from "@codemirror/lang-json";
-import { fetchSchema, setHeaders, setQuery, setVariables } from '@/lib/store/slices';
+import { json } from '@codemirror/lang-json';
+import {
+  fetchSchema,
+  setHeaders,
+  setQuery,
+  setVariables,
+} from '@/lib/store/slices';
 
 const Main = () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -32,24 +37,25 @@ const Main = () => {
   const variables = useSelector((state: RootState) => state.data.variables);
   const headers = useSelector((state: RootState) => state.data.headers);
   const schema = useSelector((state: RootState) => state.data.schema);
-  const schemaLoading = useSelector((state: RootState) => state.data.schemaLoading);
+  const schemaLoading = useSelector(
+    (state: RootState) => state.data.schemaLoading
+  );
   const apiUrl = useSelector((state: RootState) => state.data.apiUrl);
   const error = useSelector((state: RootState) => state.data.error);
-  // console.log("query", query )
 
   const dispatch = useDispatch<AppDispatch>();
-  const editorChangeHandler =  (value:string)=> {
-        dispatch(setQuery(value))
-  }
+  const editorChangeHandler = (value: string) => {
+    dispatch(setQuery(value));
+  };
 
-  const propertyEditorChangeHandler= (value:string)=> {
-    isVariablesOpen? dispatch(setVariables(value)) : dispatch(setHeaders(value)) 
-  }
-
-
+  const propertyEditorChangeHandler = (value: string) => {
+    isVariablesOpen
+      ? dispatch(setVariables(value))
+      : dispatch(setHeaders(value));
+  };
 
   useEffect(() => {
-    dispatch(fetchSchema())
+    dispatch(fetchSchema());
     if (!loading && !user) {
       router.push('/');
     }
@@ -118,7 +124,19 @@ const Main = () => {
       {isDocsOpen && (
         <div className="w-[500px] max-sm:absolute max-sm:top-[140px] overflow-auto bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
           <h3 className="text-white pl-2 text-3xl">Docs</h3>
-          {!schemaLoading? <div>Loading...</div> :<CodeMirror value={schema? JSON.stringify(schema, null, 2) : ''} theme={duotoneDark } extensions={[javascript({ jsx: true })]} width='100%' height='100%'  className='w-full max-h-[100%]' onChange={editorChangeHandler}/>}
+          {!schemaLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <CodeMirror
+              value={schema ? JSON.stringify(schema, null, 2) : ''}
+              theme={duotoneDark}
+              extensions={[javascript({ jsx: true })]}
+              width="100%"
+              height="100%"
+              className="w-full max-h-[100%]"
+              onChange={editorChangeHandler}
+            />
+          )}
         </div>
       )}
       {isUrlOpen && (
@@ -137,7 +155,15 @@ const Main = () => {
               : 'h-[calc(100vh-160px-15%)]'
           }`}
         >
-          <CodeMirror value={query} theme={duotoneDark } extensions={[javascript({ jsx: true })]} width='100%' height='100%'  className='w-full max-h-[100%]' onChange={editorChangeHandler}/>
+          <CodeMirror
+            value={query}
+            theme={duotoneDark}
+            extensions={[javascript({ jsx: true })]}
+            width="100%"
+            height="100%"
+            className="w-full max-h-[100%]"
+            onChange={editorChangeHandler}
+          />
           <JSONViewerButtons />
         </div>
         <div
@@ -175,14 +201,36 @@ const Main = () => {
           </div>
           {isEditorOpen && (
             <div className="h-[100%] w-[100%] max-sm:h-[100%]">
-             <CodeMirror value={isVariablesOpen? variables: headers} theme={duotoneDark } extensions={[json()]} width='100%' height='400px'  className='w-full max-h-[100%] overflow-auto' onChange={propertyEditorChangeHandler} />
+              <CodeMirror
+                value={isVariablesOpen ? variables : headers}
+                theme={duotoneDark}
+                extensions={[json()]}
+                width="100%"
+                height="400px"
+                className="w-full max-h-[100%] overflow-auto"
+                onChange={propertyEditorChangeHandler}
+              />
               {/* <Editor /> */}
             </div>
           )}
         </div>
       </div>
       <div className="w-[50%] h-[calc(100vh-160px)] bg-slate-600 max-sm:w-[100%] max-sm:h-[calc(100vh-140px)]">
-      <CodeMirror value={(JSON.stringify(data, null, 2) !== "{}")? JSON.stringify(data, null, 2): (String(error)===null? '': String(error)) } theme={duotoneDark } extensions={[json()]} width='100%' height='100%'  className='max-h-[100%] overflow-auto'  readOnly/> 
+        <CodeMirror
+          value={
+            JSON.stringify(data, null, 2) !== '{}'
+              ? JSON.stringify(data, null, 2)
+              : String(error) === null
+                ? ''
+                : String(error)
+          }
+          theme={duotoneDark}
+          extensions={[json()]}
+          width="100%"
+          height="100%"
+          className="max-h-[100%] overflow-auto"
+          readOnly
+        />
       </div>
     </div>
   );
