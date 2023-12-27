@@ -14,6 +14,7 @@ import { AppDispatch, RootState } from '@/lib/store/store';
 import CodeMirror from "@uiw/react-codemirror";
 import {duotoneDark } from "@uiw/codemirror-theme-duotone";
 import { javascript } from '@codemirror/lang-javascript';
+import { json} from "@codemirror/lang-json";
 import { fetchSchema, setHeaders, setQuery, setVariables } from '@/lib/store/slices';
 
 const Main = () => {
@@ -33,7 +34,8 @@ const Main = () => {
   const schema = useSelector((state: RootState) => state.data.schema);
   const schemaLoading = useSelector((state: RootState) => state.data.schemaLoading);
   const apiUrl = useSelector((state: RootState) => state.data.apiUrl);
-  console.log("query", query )
+  const error = useSelector((state: RootState) => state.data.error);
+  // console.log("query", query )
 
   const dispatch = useDispatch<AppDispatch>();
   const editorChangeHandler =  (value:string)=> {
@@ -173,14 +175,14 @@ const Main = () => {
           </div>
           {isEditorOpen && (
             <div className="h-[100%] w-[100%] max-sm:h-[100%]">
-             <CodeMirror value={isVariablesOpen? variables: headers} theme={duotoneDark } extensions={[javascript({ jsx: true })]} width='100%' height='400px'  className='w-full max-h-[100%] overflow-auto' onChange={propertyEditorChangeHandler} />
+             <CodeMirror value={isVariablesOpen? variables: headers} theme={duotoneDark } extensions={[json()]} width='100%' height='400px'  className='w-full max-h-[100%] overflow-auto' onChange={propertyEditorChangeHandler} />
               {/* <Editor /> */}
             </div>
           )}
         </div>
       </div>
       <div className="w-[50%] h-[calc(100vh-160px)] bg-slate-600 max-sm:w-[100%] max-sm:h-[calc(100vh-140px)]">
-      <CodeMirror value={data? JSON.stringify(data, null, 2): ''} theme={duotoneDark } extensions={[javascript({ jsx: true })]} width='100%' height='100%'  className='max-h-[100%] overflow-auto'  readOnly/> 
+      <CodeMirror value={(JSON.stringify(data, null, 2) !== "{}")? JSON.stringify(data, null, 2): (String(error)===null? '': String(error)) } theme={duotoneDark } extensions={[json()]} width='100%' height='100%'  className='max-h-[100%] overflow-auto'  readOnly/> 
       </div>
     </div>
   );

@@ -1,15 +1,11 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './store';
+import { AppDispatch, RootState } from './store';
+import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
-const baseQuery = `
-query {
-  characters {
-    results {
-      id
-      name
-      status
-      species
-    }
+const baseQuery = `query($id: ID!) {
+  character(id: $id) {
+		name
   }
 }
 `;
@@ -43,6 +39,7 @@ export const fetchSchema = createAsyncThunk(
         },
         body: JSON.stringify({ query: schemaQuery }),
       };
+
       const request = new Request(url, options);
   
       const req = await fetch(request);
@@ -57,46 +54,79 @@ export const fetchData = createAsyncThunk(
   'FETCH_DATA',
   async (_, { getState }) => {
     const state = getState() as RootState;
+    let error
     const query = state.data.query;
     const url = state.data.apiUrl;
+    const stateHeaders = state.data.headers;
+    // let isError = false;
+    let  jsonHeaders 
+    
+    // const headers = new Headers()
+    try{
+      jsonHeaders = JSON.parse(stateHeaders)
+     
+    }catch(err ){
+      // jsonHeaders = {}
+      // console.log("catch error",err.message.split("JSON")[0], typeof err.message)
+      // state.data.data = {error: err.message.split("JSON")[0] }
+      // state.data.error = String(err.message.split("JSON")[0] )
+
+      // isError = true
+      throw new Error("Headers must be a valid JSON string. "+ (err as Error).message  )
+    }
+    // if(error){
+    //   return error
+    // }
+      const variables = state.data.variables
+    const requestBody = {
+      query: query,
+      variables: {}
+    }
+    variables? requestBody.variables = JSON.parse(variables) : null
     const options = {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query }),
+      headers: jsonHeaders,
+      body: JSON.stringify(requestBody),
     };
+    
     const request = new Request(url, options);
+      const req = await fetch(request);
+    if(req.ok){
+      const data = await req.json();
+      return data.data
+    } else {
+      const data = await req.json();
+      return data
+    }
 
-    const req = await fetch(request);
-    const data = await req.json();
-
-    return data.data;
   }
 );
 
 interface InitialState {
-  headers: string;
-  variables: string;
+  headers: string ;
+  variables: string
   apiUrl: string;
   query: string;
   data: object | null;
   loading: boolean;
   schemaLoading: boolean;
-  value: number;
-  schema: object | null
+  schema: object | null;
+  error: string | null 
 }
 
 const initialState: InitialState = {
-  headers: '',
-  variables: '',
+  headers: '{"Content-Type": "application/json"}',
+  variables:
+  `  {
+    "id": "1"
+  }`,
   apiUrl: 'https://rickandmortyapi.graphcdn.app/',
   query: baseQuery,
-  data: null,
+  data: {},
   loading: false,
   schemaLoading: false,
-  value: 10,
-  schema: null
+  schema: null,
+  error: "ERROR BASe",
 };
 
 const dataSlice = createSlice({
@@ -115,6 +145,9 @@ const dataSlice = createSlice({
     setUrl: (state, action: PayloadAction<string>) => {
         state.apiUrl = action.payload;
     },
+    setData: (state, action: PayloadAction<object>) => {
+      state.data = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, action) => {
@@ -124,10 +157,14 @@ const dataSlice = createSlice({
 
     builder.addCase(fetchData.pending, (state) => {
       state.loading = true;
+      // state.data = {}
     });
 
-    builder.addCase(fetchData.rejected, (state) => {
+    builder.addCase(fetchData.rejected, (state, action) => {
         state.loading = false;
+console.log("error in add case", action.payload)
+        state.data= {}
+        state.error = action.error.message;
     });
     builder.addCase(fetchSchema.fulfilled, (state, action) => {
         state.schema = action.payload
