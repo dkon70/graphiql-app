@@ -14,7 +14,6 @@ import { AppDispatch, RootState } from '@/lib/store/store';
 import CodeMirror from '@uiw/react-codemirror';
 import { duotoneDark } from '@uiw/codemirror-theme-duotone';
 import { javascript } from '@codemirror/lang-javascript';
-import { json } from '@codemirror/lang-json';
 import {
   fetchSchema,
   setHeaders,
