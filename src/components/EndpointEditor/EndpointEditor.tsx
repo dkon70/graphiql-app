@@ -1,13 +1,15 @@
 import { useLang } from '@/lib/langContext';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import { textContent, TextContentType } from '@/lib/langText';
+import { AppDispatch, RootState } from '@/lib/store/store';
+import { setUrl } from '@/lib/store/slices';
 
 const EndpointEditor = () => {
   const [isEditing, setEditing] = useState(false);
-  const [inputValue, setInputValue] = useState(
-    'https://rickandmortyapi.com/graphql'
-  );
+  const inputValue = useSelector((state: RootState) => state.data.apiUrl);
+  const dispatch = useDispatch<AppDispatch>();
   const { lang } = useLang();
   const text = textContent[lang as keyof TextContentType].dashboard;
 
@@ -21,7 +23,7 @@ const EndpointEditor = () => {
         <input
           className="pl-2 my-5 w-full h-[40px] bg-white rounded text-black outline-none"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => dispatch(setUrl(e.target.value))}
         />
       )}
       <Button variant="secondary" onClick={() => setEditing(!isEditing)}>
