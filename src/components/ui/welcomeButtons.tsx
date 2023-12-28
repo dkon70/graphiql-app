@@ -18,7 +18,7 @@ export default function WelcomeButtons() {
       {error ? (
         <p>error.message</p>
       ) : loading ? (
-        <p>Loading...</p>
+        <p>{text.loading}</p>
       ) : user ? (
         <Link href={'/main'} className={buttonVariants()}>
           {text.dashboard}

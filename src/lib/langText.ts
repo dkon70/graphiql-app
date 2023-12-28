@@ -17,6 +17,7 @@ type Welcome = {
   login: string;
   register: string;
   dashboard: string;
+  loading: string;
 };
 
 type TeamMemder = {
@@ -52,6 +53,7 @@ type AuthPage = {
   passwordLabel: string;
   passwordPlaceholder: string;
   submitButton: string;
+  loading: string;
 };
 
 type NotFound = {
@@ -79,6 +81,7 @@ type Dashboard = {
   };
   variables: string;
   headers: string;
+  loading: string;
 };
 
 type langText = {
@@ -116,6 +119,7 @@ export const enText: langText = {
     login: 'Login',
     register: 'Register',
     dashboard: 'Main Page',
+    loading: 'Loading...',
   },
   team: {
     aboutTeam: {
@@ -160,6 +164,7 @@ export const enText: langText = {
     passwordLabel: 'Password',
     passwordPlaceholder: 'Your password',
     submitButton: 'Submit',
+    loading: 'Loading...',
   },
   notFound: {
     title: 'Page not found',
@@ -184,6 +189,7 @@ export const enText: langText = {
     },
     variables: 'Variables',
     headers: 'Headers',
+    loading: 'Loading...',
   },
 };
 
@@ -206,6 +212,7 @@ export const ruText: langText = {
     login: 'Войти',
     register: 'Зарегистрироваться',
     dashboard: 'Главная страница',
+    loading: 'Загрузка...',
   },
   team: {
     aboutTeam: {
@@ -250,6 +257,7 @@ export const ruText: langText = {
     passwordLabel: 'Пароль',
     passwordPlaceholder: 'Ваш пароль',
     submitButton: 'Отправить',
+    loading: 'Загрузка...',
   },
   notFound: {
     title: 'Страница не найдена',
@@ -274,6 +282,7 @@ export const ruText: langText = {
     },
     variables: 'Переменные',
     headers: 'Заголовки',
+    loading: 'Загрузка...',
   },
 };
 
