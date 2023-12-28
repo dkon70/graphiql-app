@@ -134,7 +134,7 @@ const Main = () => {
               width="100%"
               height="100%"
               className="w-full max-h-[100%]"
-              onChange={editorChangeHandler}
+              readOnly
             />
           )}
         </div>
@@ -204,13 +204,12 @@ const Main = () => {
               <CodeMirror
                 value={isVariablesOpen ? variables : headers}
                 theme={duotoneDark}
-                extensions={[json()]}
+                extensions={[javascript({ jsx: true })]}
                 width="100%"
-                height="400px"
-                className="w-full max-h-[100%] overflow-auto"
+                height="100%"
+                className="w-full max-h-[100%] "
                 onChange={propertyEditorChangeHandler}
               />
-              {/* <Editor /> */}
             </div>
           )}
         </div>
@@ -225,10 +224,10 @@ const Main = () => {
                 : String(error)
           }
           theme={duotoneDark}
-          extensions={[json()]}
+          extensions={[javascript({ jsx: true })]}
           width="100%"
           height="100%"
-          className="max-h-[100%] overflow-auto"
+          className="max-h-[100%]"
           readOnly
         />
       </div>
