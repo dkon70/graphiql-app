@@ -16,6 +16,7 @@ export default function Welcome() {
         <div className="flex flex-col   items-center justify-center md:flex-row max-w-7xl">
           <Image
             src={image}
+            priority={true}
             alt="Rick and Morty"
             width={280}
             className="my-auto"
