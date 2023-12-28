@@ -57,16 +57,31 @@ export const fetchData = createAsyncThunk(
     try {
       jsonHeaders = JSON.parse(stateHeaders);
     } catch (err) {
-      throw new Error(
-        'Headers must be a valid JSON string. ' + (err as Error).message
-      );
+      if (err instanceof Error) {
+        throw new Error(
+          'Headers must be a valid JSON string. ' + err.message
+        );
+        
+      }
     }
     const variables = state.data.variables;
     const requestBody = {
       query: query,
       variables: {},
     };
-    variables ? (requestBody.variables = JSON.parse(variables)) : null;
+    if(variables){
+      try{
+        requestBody.variables = JSON.parse(variables)
+      }catch(err){
+        if(err instanceof Error){
+          throw new Error(
+            'Variables must be a valid JSON string. ' + err.message
+          );
+        }
+      }
+    } else {
+      requestBody.variables = {}
+    }
     const options = {
       method: 'POST',
       headers: jsonHeaders,
