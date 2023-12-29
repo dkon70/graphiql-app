@@ -1,15 +1,23 @@
 import playImage from '../../../public/play.svg';
 import Image from 'next/image';
 import broomImage from '../../../public/broom.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '@/lib/store/slices';
 import { AppDispatch } from '@/lib/store/store';
+import { prettifyText } from '@/lib/prettifier';
+import { RootState } from '@/lib/store/store';
+import { setQuery } from '@/lib/store/slices';
 
 const JSONViewerButtons = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const query = useSelector((state: RootState) => state.data.query);
 
   async function onClickFetch() {
     dispatch(fetchData());
+  }
+
+  function onClickPrettify() {
+    dispatch(setQuery(prettifyText(query) || ''));
   }
 
   return (
@@ -20,7 +28,10 @@ const JSONViewerButtons = () => {
       >
         <Image src={playImage} alt="Start" />
       </button>
-      <button className="bg-slate-700 hover:bg-slate-600 rounded h-10 w-10 p-1 duration-150">
+      <button
+        className="bg-slate-700 hover:bg-slate-600 rounded h-10 w-10 p-1 duration-150"
+        onClick={onClickPrettify}
+      >
         <Image src={broomImage} alt="Prettify" />
       </button>
     </div>

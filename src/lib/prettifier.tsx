@@ -61,7 +61,7 @@ export function prettifyText(text: string) {
           : totalList.push(el);
       }
     } else if (el === ',') {
-      totalList.push(',\n' + '  '.repeat(dif));
+      totalList.push(', '.repeat(dif));
     } else {
       totalList.push(el);
     }
