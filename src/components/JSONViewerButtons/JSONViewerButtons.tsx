@@ -7,6 +7,7 @@ import { AppDispatch } from '@/lib/store/store';
 import { prettifyText } from '@/lib/utils';
 import { RootState } from '@/lib/store/store';
 import { setQuery } from '@/lib/store/slices';
+import { toast } from '../ui/use-toast';
 
 const JSONViewerButtons = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,7 +18,16 @@ const JSONViewerButtons = () => {
   }
 
   function onClickPrettify() {
-    dispatch(setQuery(prettifyText(query) || ''));
+    const editedQuery = prettifyText(query);
+    if (editedQuery) {
+      dispatch(setQuery(editedQuery));
+    } else {
+      toast({
+        variant: 'destructive',
+        title: 'Invalid request',
+        description: 'Check your request',
+      });
+    }
   }
 
   return (
