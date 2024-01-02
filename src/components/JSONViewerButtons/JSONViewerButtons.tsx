@@ -4,7 +4,7 @@ import broomImage from '../../../public/broom.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '@/lib/store/slices';
 import { AppDispatch } from '@/lib/store/store';
-import { prettifyText } from '@/lib/prettifier';
+import { prettifyText } from '@/lib/utils';
 import { RootState } from '@/lib/store/store';
 import { setQuery } from '@/lib/store/slices';
 
