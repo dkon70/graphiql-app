@@ -1,6 +1,6 @@
-import playImage from '../../../public/play.svg';
+import playImage from '@/images/play.svg';
 import Image from 'next/image';
-import broomImage from '../../../public/broom.svg';
+import broomImage from '@/images/broom.svg';
 import { useDispatch } from 'react-redux';
 import { fetchData } from '@/lib/store/slices';
 import { AppDispatch } from '@/lib/store/store';

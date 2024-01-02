@@ -1,11 +1,11 @@
 import JSONViewerButtons from '@/components/JSONViewerButtons/JSONViewerButtons';
-import upArrow from '../../public/up-arrow.svg';
-import downArrow from '../../public/down-arrow.svg';
-import { useEffect, useState } from 'react';
+import upArrow from "@/images/up-arrow.svg"
+import downArrow from '@/images/down-arrow.svg';
+import {useEffect, useState } from 'react';
 import Image from 'next/image';
-import docsButton from '../../public/docs.svg';
+import docsButton from '@/images/docs.svg';
 import EndpointEditor from '@/components/EndpointEditor/EndpointEditor';
-import urlButton from '../../public/url.svg';
+import urlButton from '@/images/url.svg';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { useRouter } from 'next/router';
@@ -15,13 +15,22 @@ import CodeMirror from '@uiw/react-codemirror';
 import { duotoneDark } from '@uiw/codemirror-theme-duotone';
 import { javascript } from '@codemirror/lang-javascript';
 import {
-  fetchSchema,
   setHeaders,
   setQuery,
   setVariables,
 } from '@/lib/store/slices';
+// import Docs from '@/components/Docs';
+// import dynamic from 'next/dynamic'
+// import Loading from './loading';
+// import Loading from './loading';
 
-const Main = () => {
+
+// const DocsComponent = dynamic(() => import('@/components/Docs/index'), {
+//   ssr: false,
+//   loading: () => <p>Loading...</p>,
+// });
+
+const Main =  () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isVariablesOpen, setVariablesOpen] = useState(false);
   const [isHeadersOpen, setHeadersOpen] = useState(false);
@@ -35,10 +44,7 @@ const Main = () => {
   const query = useSelector((state: RootState) => state.data.query);
   const variables = useSelector((state: RootState) => state.data.variables);
   const headers = useSelector((state: RootState) => state.data.headers);
-  const schema = useSelector((state: RootState) => state.data.schema);
-  const schemaLoading = useSelector(
-    (state: RootState) => state.data.schemaLoading
-  );
+  
   const apiUrl = useSelector((state: RootState) => state.data.apiUrl);
   const error = useSelector((state: RootState) => state.data.error);
 
@@ -54,7 +60,7 @@ const Main = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchSchema());
+    // dispatch(fetchSchema());
     if (!loading && !user) {
       router.push('/');
     }
@@ -99,6 +105,7 @@ const Main = () => {
   };
 
   return (
+
     <div className="flex h-[calc(100vh-160px)] bg-slate-700 max-sm:flex-col max-sm:h-full">
       <div
         className={`bg-slate-700 h-[calc(100vh-160px)] w-[57px] border-r border-solid border-gray-500 py-2 px-2 max-sm:rotate-360 max-sm:h-[60px] max-sm:w-[100%] max-sm:border-r-0 max-sm:border-b`}
@@ -120,24 +127,20 @@ const Main = () => {
           <Image src={urlButton} alt="url" />
         </button>
       </div>
-      {isDocsOpen && (
-        <div className="w-[500px] max-sm:absolute max-sm:top-[140px] overflow-auto bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
-          <h3 className="text-white pl-2 text-3xl">Docs</h3>
-          {!schemaLoading ? (
-            <div>Loading...</div>
-          ) : (
-            <CodeMirror
-              value={schema ? JSON.stringify(schema, null, 2) : ''}
-              theme={duotoneDark}
-              extensions={[javascript({ jsx: true })]}
-              width="100%"
-              height="100%"
-              className="w-full max-h-[100%]"
-              readOnly
-            />
-          )}
+      <div className="absolute w-[500px] max-sm:absolute max-sm:top-[140px] overflow-auto bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
+      {/* {isDocsOpen &&  */}
+      
+        <div className='border-red-500 border-4'>
+          <h1 className='text-3xl '>Hello</h1>
+          {/* <Suspense fallback={<Loading></Loading>}> */}
+            {/* <Docs></Docs> */}
+          {/* </Suspense> */}
+
         </div>
-      )}
+
+
+      {/*  } */}
+      </div>
       {isUrlOpen && (
         <div className="w-[500px] max-sm:absolute max-sm:top-[140px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
           <h3 className="text-white pl-2 text-3xl">URL</h3>
@@ -231,6 +234,7 @@ const Main = () => {
         />
       </div>
     </div>
+
   );
 };
 

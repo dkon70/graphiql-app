@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import githubIcon from '../../../public/github-mark-white.svg';
-import rsLogo from '../../../public/rs.jpg';
+import githubIcon from '@/images/github-mark-white.svg';
+import rsLogo from '@/images/rs.jpg';
 
 const Footer = () => {
   return (

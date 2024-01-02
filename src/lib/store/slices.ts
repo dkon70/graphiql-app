@@ -8,42 +8,6 @@ const baseQuery = `query($id: ID!) {
 }
 `;
 
-const schemaQuery = ` {
-    __schema {
-      types {
-        name
-        fields {
-          name
-          type {
-           name
-          }
-        }
-      }
-    }
-  }
-  `;
-
-export const fetchSchema = createAsyncThunk(
-  'FETCH_SCHEMA',
-  async (_, { getState }) => {
-    const state = getState() as RootState;
-    const url = state.data.apiUrl;
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query: schemaQuery }),
-    };
-
-    const request = new Request(url, options);
-
-    const req = await fetch(request);
-    const data = await req.json();
-
-    return data.data;
-  }
-);
 
 export const fetchData = createAsyncThunk(
   'FETCH_DATA',
@@ -161,17 +125,17 @@ const dataSlice = createSlice({
       state.data = {};
       state.error = action.error.message as string;
     });
-    builder.addCase(fetchSchema.fulfilled, (state, action) => {
-      state.schema = action.payload;
-    });
+    // builder.addCase(fetchSchema.fulfilled, (state, action) => {
+    //   state.schema = action.payload;
+    // });
 
-    builder.addCase(fetchSchema.pending, (state) => {
-      state.schemaLoading = true;
-    });
+    // builder.addCase(fetchSchema.pending, (state) => {
+    //   state.schemaLoading = true;
+    // });
 
-    builder.addCase(fetchSchema.rejected, (state) => {
-      state.schemaLoading = false;
-    });
+    // builder.addCase(fetchSchema.rejected, (state) => {
+    //   state.schemaLoading = false;
+    // });
   },
 });
 
