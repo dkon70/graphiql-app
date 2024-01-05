@@ -1,25 +1,27 @@
-import JSONViewerButtons from '@/components/JSONViewerButtons/JSONViewerButtons';
-import upArrow from '../../public/up-arrow.svg';
-import downArrow from '../../public/down-arrow.svg';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import docsButton from '../../public/docs.svg';
-import EndpointEditor from '@/components/EndpointEditor/EndpointEditor';
-import urlButton from '../../public/url.svg';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/lib/store/store';
 import CodeMirror from '@uiw/react-codemirror';
 import { duotoneDark } from '@uiw/codemirror-theme-duotone';
 import { javascript } from '@codemirror/lang-javascript';
+import JSONViewerButtons from '@/components/JSONViewerButtons/JSONViewerButtons';
+import EndpointEditor from '@/components/EndpointEditor/EndpointEditor';
+import upArrow from '../../public/up-arrow.svg';
+import downArrow from '../../public/down-arrow.svg';
+import docsButton from '../../public/docs.svg';
+import urlButton from '../../public/url.svg';
+import { AppDispatch, RootState } from '@/lib/store/store';
 import {
   fetchSchema,
   setHeaders,
   setQuery,
   setVariables,
 } from '@/lib/store/slices';
+import { useLang } from '@/lib/langContext';
+import { TextContentType, textContent } from '@/lib/langText';
 
 const Main = () => {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -30,6 +32,8 @@ const Main = () => {
   const router = useRouter();
 
   const [user, loading] = useAuthState(auth);
+  const { lang } = useLang();
+  const text = textContent[lang as keyof TextContentType].dashboard;
 
   const data = useSelector((state: RootState) => state.data.data);
   const query = useSelector((state: RootState) => state.data.query);
@@ -122,9 +126,9 @@ const Main = () => {
       </div>
       {isDocsOpen && (
         <div className="w-[500px] max-sm:absolute max-sm:top-[140px] overflow-auto bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
-          <h3 className="text-white pl-2 text-3xl">Docs</h3>
+          <h3 className="text-white pl-2 text-3xl">{text.docs}</h3>
           {!schemaLoading ? (
-            <div>Loading...</div>
+            <div>{text.loading}</div>
           ) : (
             <CodeMirror
               value={schema ? JSON.stringify(schema, null, 2) : ''}
@@ -140,7 +144,7 @@ const Main = () => {
       )}
       {isUrlOpen && (
         <div className="w-[500px] max-sm:absolute max-sm:top-[140px] bg-slate-700 border-r border-solid border-gray-500 py-2 px-5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
-          <h3 className="text-white pl-2 text-3xl">URL</h3>
+          <h3 className="text-white pl-2 text-3xl">{text.url.title}</h3>
           <div className="w-[90%] max-sm:w-[70%]">
             <EndpointEditor />
           </div>
@@ -180,7 +184,7 @@ const Main = () => {
                 } hover:bg-slate-600 px-2 py-1 rounded duration-150`}
                 onClick={variablesButtonHandler}
               >
-                Variables
+                {text.variables}
               </button>
               <button
                 className={`bg-slate-700 ${
@@ -188,7 +192,7 @@ const Main = () => {
                 } hover:bg-slate-600 px-2 py-1 rounded duration-150`}
                 onClick={headersButtonHandler}
               >
-                Headers
+                {text.headers}
               </button>
             </div>
             <button
