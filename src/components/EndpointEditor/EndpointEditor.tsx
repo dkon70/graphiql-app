@@ -24,9 +24,14 @@ const EndpointEditor = () => {
           className="pl-2 my-5 w-full h-[40px] bg-white rounded text-black outline-none"
           value={inputValue}
           onChange={(e) => dispatch(setUrl(e.target.value))}
+          data-testid="input"
         />
       )}
-      <Button variant="secondary" onClick={() => setEditing(!isEditing)}>
+      <Button
+        variant="secondary"
+        onClick={() => setEditing(!isEditing)}
+        data-testid="button"
+      >
         {isEditing ? text.url.save : text.url.edit}
       </Button>
     </div>
