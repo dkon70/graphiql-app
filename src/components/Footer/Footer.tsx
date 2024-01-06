@@ -4,6 +4,8 @@ import githubIcon from '@/images/github-mark-white.svg';
 import rsLogo from '@/images/rs.jpg';
 
 const Footer = () => {
+  const githubNames = ['dkon70', 'NikitaStarmoussov', 'natanchik'];
+
   return (
     <footer
       className="bg-slate-800 w-full p-5 flex max-md:flex-col max-md:gap-5 justify-between text-white items-center  "
@@ -14,31 +16,17 @@ const Footer = () => {
         data-testid="section"
       >
         <Image className="w-5 h-5" src={githubIcon} alt="github" />
-        <ul className="flex gap-5 w-0 max-md:w-full">
-          <li className="flex gap-2">
-            <Link
-              href="https://github.com/dkon70"
-              className="flex items-center"
-            >
-              dkon70
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="https://github.com/NikitaStarmoussov"
-              className="flex items-center"
-            >
-              NikitaStarmoussov
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="https://github.com/natanchik"
-              className="flex items-center"
-            >
-              natanchik
-            </Link>
-          </li>
+        <ul className="flex gap-5 w-0 max-lg:w-full">
+          {githubNames.map((name) => (
+            <li className="flex gap-2" key={name}>
+              <Link
+                href={'https://github.com/' + name}
+                className="flex items-center"
+              >
+                {name}
+              </Link>
+            </li>
+          ))}
         </ul>
       </section>
       <section data-testid="section">
@@ -46,7 +34,12 @@ const Footer = () => {
       </section>
       <section data-testid="section">
         <Link href="https://rs.school/react/">
-          <Image src={rsLogo} alt="rs-logo" className="w-10 h-10 rounded-sm" />
+          <Image
+            src={rsLogo}
+            alt="rs-logo"
+            className="w-max h-10 rounded-sm"
+            priority={true}
+          />
         </Link>
       </section>
     </footer>

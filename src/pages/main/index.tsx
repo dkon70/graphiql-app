@@ -171,7 +171,7 @@ const Main = () => {
     </div>
     <Separator orientation='horizontal' className=' bg-slate-700 '/>
     <div
-          className={`bg-slate-700  border-t border-solid border-gray-500 p-2 ${isEditorOpen ? "absolute inset-x-0 bottom-[80px] w-100wv h-":"h-[60px]"} transition-all `}
+          className={`bg-slate-700  border-t border-solid border-gray-500 p-2 ${isEditorOpen ? "absolute inset-x-0 bottom-[80px] w-100wv z-40":"h-[60px]"} transition-all `}
         >
           <div className="flex bg-slate-700 justify-between items-center">
             <div className="flex gap-5 mx-5">

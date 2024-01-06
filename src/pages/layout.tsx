@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { useLang } from '@/lib/langContext';
 import { Provider } from 'react-redux';
 import store from '@/lib/store/store';
+import Head from 'next/head';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { updateLang } = useLang();
@@ -18,6 +19,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className='flex flex-col justify-between h-full'>
+      <Head>
+        <title>GraphQl Sandbox</title>
+      </Head>
       <Header />
       <main className=" bg-slate-500 grow">
         <Provider store={store}>{children}</Provider>
