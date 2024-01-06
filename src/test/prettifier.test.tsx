@@ -8,7 +8,7 @@ const text2 = `{
   djfhg: fhgkdj
 }`;
 const text3 = `{
-  field(arg: "value") {
+  field(arg: "value"){
     subField
   }
 }`;

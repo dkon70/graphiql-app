@@ -8,6 +8,10 @@ import { signout } from '@/firebase/signOut';
 import { useLang } from '@/lib/langContext';
 import { textContent, TextContentType } from '@/lib/langText';
 import Image from 'next/image';
+import homeSvg from '@/images/home.svg';
+import exitSvg from '@/images/exit.svg';
+import signIn from '@/images/signin.svg'
+import signUp from '@/images/signup.svg'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,14 +31,14 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full bg-slate-800 sticky z-10 top-0 flex p-5 duration-200 text-white items-center justify-between ${
+      className={`w-full sticky bg-slate-800 z-10 top-0 flex p-5 duration-200 text-white items-center justify-between ${
         isScrolled ? 'pt-2 pb-2' : ''
       }`}
       data-testid="header"
     >
       <Link href="/">
         <Image
-          src="/home.svg"
+          src={homeSvg}
           width={100}
           height={40}
           alt="Logo"
@@ -60,7 +64,7 @@ const Header = () => {
               signout();
             }}
           >
-            <Image src="/exit.svg" width={25} height={25} alt="Exit" />
+            <Image src={exitSvg} width={25} height={25} alt="Exit" />
           </Button>
         ) : (
           <span className="flex flex-wrap justify-end gap-1">
@@ -68,13 +72,13 @@ const Header = () => {
               href={'/login'}
               className="bg-slate-800 hover:bg-slate-600 rounded h-10 w-10 p-1 duration-150"
             >
-              <Image src="/signin.svg" width={30} height={30} alt="Sign in" />
+              <Image src={signIn} width={30} height={30} alt="Sign in" />
             </Link>
             <Link
               href={'/register'}
               className="bg-slate-800 hover:bg-slate-600 rounded h-10 w-10 p-1 duration-150"
             >
-              <Image src="/signup.svg" width={28} height={28} alt="Register" />
+              <Image src={signUp} width={28} height={28} alt="Register" />
             </Link>
           </span>
         )}

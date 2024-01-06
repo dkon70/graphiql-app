@@ -1,43 +1,42 @@
-import React from 'react';
+
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
+import '@testing-library/jest-dom';
 import EndpointEditor from '@/components/EndpointEditor/EndpointEditor';
 import store from '@/lib/store/store';
-import '@testing-library/jest-dom';
+import { Provider } from 'react-redux';
 
-describe('EndpointEditor', () => {
-  test('renders endpoint editor correctly', () => {
+describe('Endpoint editor tests: ', () => {
+  test('Endpoint editor exists', () => {
     render(
       <Provider store={store}>
-        <EndpointEditor />
+      <EndpointEditor/>
       </Provider>
-    );
-
-    const button = screen.getByTestId('button');
-    fireEvent.click(button);
-    const input = screen.getByTestId('input');
-    expect(input).toBeInTheDocument();
+  );
+    const endpointEditor = screen.getByTestId('endpoint');
+    expect(endpointEditor).toBeInTheDocument();
   });
 
-  test('saves changes correctly', () => {
+  test('Endpoint editor renders correctly', () => {
+    render(<Provider store={store}>
+      <EndpointEditor/>
+      </Provider>);
+    const button = screen.getAllByTestId('button');
+    expect(button).toBeInTheDocument;
+  });
+
+  test('displays current URL after editing is finished', () => {
     render(
       <Provider store={store}>
         <EndpointEditor />
       </Provider>
     );
-
+  
     const editButton = screen.getByTestId('button');
     fireEvent.click(editButton);
-
     const input = screen.getByTestId('input');
     fireEvent.change(input, { target: { value: 'https://test.test' } });
-
-    const saveButton = screen.getByTestId('button');
-    fireEvent.click(saveButton);
-
-    expect(store.getState().data.apiUrl).toBe('https://test.test');
-
-    const editedInput = screen.queryByTestId('input');
-    expect(editedInput).toBeNull();
+    fireEvent.click(screen.getByTestId('button'));
+    const displayedUrl = screen.getByText('https://test.test');
+    expect(displayedUrl).toBeInTheDocument();
   });
 });

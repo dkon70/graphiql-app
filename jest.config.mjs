@@ -12,7 +12,7 @@ const config = {
   collectCoverageFrom: ['src/**/*.ts', 'src/**/*.tsx'],
   coverageDirectory: path.join(process.cwd(), 'coverage'),
   coveragePathIgnorePatterns: [
-    'src/test/setup.ts',
+    'src/test/',
     'lib/store',
     'src/pages/_document.tsx',
   ],
