@@ -173,7 +173,10 @@ const Main = () => {
               </div>
             ) : null}
           </section>
-          <section className="w-full" data-testid="section">
+          <section
+            className="w-[calc(50vw-56px)] max-md:w-[calc(100vw-56px)]"
+            data-testid="section"
+          >
             <QueryEditor />
           </section>
         </div>
@@ -181,7 +184,10 @@ const Main = () => {
           <section data-testid="section">
             <JSONViewerButtons />
           </section>
-          <section className="w-full" data-testid="section">
+          <section
+            className="w-[calc(50vw-57px)] max-md:w-[calc(100vw-56px)]"
+            data-testid="section"
+          >
             <ResponseViewier />
           </section>
         </div>
