@@ -120,6 +120,7 @@ const Main = () => {
                   `  hover:bg-slate-600 rounded h-10 w-10 p-2 duration-150`
                 )}
                 onClick={docsOpenHandler}
+                data-testid='docs-button'
               >
                 <Image src={docsButton} alt="docs" />
               </button>
@@ -129,6 +130,7 @@ const Main = () => {
                   `  hover:bg-slate-600 rounded h-10 w-10 p-2 duration-150`
                 )}
                 onClick={urlOpenHandler}
+                data-testid='url-button'
               >
                 <Image src={urlButton} alt="url" />
               </button>
@@ -139,6 +141,7 @@ const Main = () => {
                 className={`${
                   isDocsOpen ? 'absolute z-30 inset-x-[50px]' : 'hidden'
                 } max-w-[calc(100vw-100px)] max-h-[calc(100vh-220px)] h-full   transition delay-200`}
+                data-testid='docs-container'
               >
                 {schemaLoading ? (
                   <div>Loading...</div>
