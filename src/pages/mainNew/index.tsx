@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
 import { AppDispatch, RootState } from '@/lib/store/store';
 import { javascript } from '@codemirror/lang-javascript';
-import { duotoneDark } from '@uiw/codemirror-theme-duotone';
+import { dracula } from '@uiw/codemirror-theme-dracula';
 import { useDispatch, useSelector } from 'react-redux';
 import CodeMirror from '@uiw/react-codemirror';
 import { fetchSchema, setHeaders, setVariables } from '@/lib/store/slices';
@@ -43,7 +43,6 @@ const Main = () => {
       };
     
       const urlOpenHandler = () => {
-        // console.log(isUrlOpen)
         if (!isDocsOpen) {
           setUrlOpen(!isUrlOpen);
         } else {
@@ -56,8 +55,7 @@ const Main = () => {
       const [isEditorOpen, setIsEditorOpen] = useState(false);
       const [isVariablesOpen, setVariablesOpen] = useState(false);
       const [isHeadersOpen, setHeadersOpen] = useState(false);
-      // const [isDocsOpen, setDocsOpen] = useState(false);
-      // const [isUrlOpen, setUrlOpen] = useState(false);
+
       const router = useRouter();
     
       const [user, loading] = useAuthState(auth);
@@ -113,9 +111,12 @@ const Main = () => {
   return (
     <div className='flex flex-col self-stretch items-stretch  grow h-[calc(100vh-160px)]'>
     
-     <div className={`flex justify-between bg-slate-500 items-stretch self-stretch h-full max-h-[40%]`}>
+     <div className={`md:flex-row flex flex-col md:justify-between bg-slate-500 items-stretch self-stretch h-full max-h-[calc(100vh-220px)]`}>
+        <div className='flex w-full h-full' >
+          
+        
         <section className='flex  '>
-            <div className='flex flex-col gap-5 p-2  h-full'>
+            <div className='flex flex-col gap-5 p-2  md:h-full h-[200px]'>
             <button
         className={cn(`${isDocsOpen? 'bg-slate-900' : 'bg-slate-700'}`,`  hover:bg-slate-600 rounded h-10 w-10 p-2 duration-150`)}
           onClick={docsOpenHandler}
@@ -130,23 +131,23 @@ const Main = () => {
         </button>
             </div>
             <Separator orientation='vertical' className=' bg-slate-700 '/>
-            {isDocsOpen?<div className={`${isDocsOpen? "block" : "hidden"} w-full  transition delay-200`}>
+            {isDocsOpen?<div className={`${isDocsOpen? "absolute z-30 inset-x-[50px]" : "hidden"} max-w-[calc(100vw-100px)] max-h-[calc(100vh-220px)] h-full   transition delay-200`}>
            
           {schemaLoading ? (
             <div>Loading...</div>
           ) : (
             <CodeMirror
               value={schema ? '"Docs": ' + JSON.stringify(schema, null, 2) : '"Docs": '}
-              theme={duotoneDark}
+              theme={dracula}
               extensions={[javascript({ jsx: true })]}
               width='100%'
               height='100%'
-              className="w-full max-h-[100vh] h-full"
+              className="w-full max-h-[calc(100vh-160px)] h-full "
               readOnly
             />
           )}
             </div>:null}
-            {isUrlOpen?<div className={` w-full h-full transition delay-200 py-2 px-5`}>
+            {isUrlOpen?<div className={`  transition delay-200 py-2 px-5 absolute z-30 inset-x-[50px] bg-slate-500 max-w-xs h-[calc(100vh-220px)]`}>
           <h3 className="text-white pl-2 text-3xl">URL</h3>
           <div className="w-full ">
             <EndpointEditor />
@@ -156,16 +157,21 @@ const Main = () => {
             <section className='w-full'>
                 <QueryEditor/>
             </section>
+            </div>
+            <div className='flex w-full h-full'>
+
+            
         <section className=''> 
         <JSONViewerButtons />
         </section>
         <section className='w-full'>
         <ResponseViewier/>
         </section>
+        </div>
     </div>
     <Separator orientation='horizontal' className=' bg-slate-700 '/>
     <div
-          className={`bg-slate-700  border-t border-solid border-gray-500 p-2 ${isEditorOpen ? "h-[360px]":"h-[60px]"}`}
+          className={`bg-slate-700  border-t border-solid border-gray-500 p-2 ${isEditorOpen ? "absolute inset-x-0 bottom-[80px] w-100wv h-":"h-[60px]"} transition-all `}
         >
           <div className="flex bg-slate-700 justify-between items-center">
             <div className="flex gap-5 mx-5">
@@ -197,12 +203,10 @@ const Main = () => {
             <div className="h-full w-full">
               <CodeMirror
                 value={isVariablesOpen ? variables : headers}
-                theme={duotoneDark}
+                theme={dracula}
                 extensions={[javascript({ jsx: true })]}
                 width="100%"
                 height="300px"
-                // className="w-full h-full max-h-[20vh]
-                // min-h-[20vh] min-w-[30vw]"
                 onChange={propertyEditorChangeHandler}
               />
             </div>

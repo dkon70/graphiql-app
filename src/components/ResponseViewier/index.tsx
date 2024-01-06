@@ -1,6 +1,6 @@
 import { RootState } from '@/lib/store/store';
 import { javascript } from '@codemirror/lang-javascript';
-import { duotoneDark } from '@uiw/codemirror-theme-duotone';
+import { dracula } from '@uiw/codemirror-theme-dracula';
 import CodeMirror from '@uiw/react-codemirror';
 import { useSelector } from 'react-redux';
 
@@ -16,7 +16,7 @@ const ResponseViewier = () => {
                 ? ''
                 : String(error)
           }
-          theme={duotoneDark}
+          theme={dracula}
           extensions={[javascript({ jsx: true })]}
           width="100%"
           height="100%"
