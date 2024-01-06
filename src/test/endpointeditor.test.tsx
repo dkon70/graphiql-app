@@ -1,4 +1,3 @@
-
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import EndpointEditor from '@/components/EndpointEditor/EndpointEditor';
@@ -9,17 +8,19 @@ describe('Endpoint editor tests: ', () => {
   test('Endpoint editor exists', () => {
     render(
       <Provider store={store}>
-      <EndpointEditor/>
+        <EndpointEditor />
       </Provider>
-  );
+    );
     const endpointEditor = screen.getByTestId('endpoint');
     expect(endpointEditor).toBeInTheDocument();
   });
 
   test('Endpoint editor renders correctly', () => {
-    render(<Provider store={store}>
-      <EndpointEditor/>
-      </Provider>);
+    render(
+      <Provider store={store}>
+        <EndpointEditor />
+      </Provider>
+    );
     const button = screen.getAllByTestId('button');
     expect(button).toBeInTheDocument;
   });
@@ -30,7 +31,7 @@ describe('Endpoint editor tests: ', () => {
         <EndpointEditor />
       </Provider>
     );
-  
+
     const editButton = screen.getByTestId('button');
     fireEvent.click(editButton);
     const input = screen.getByTestId('input');

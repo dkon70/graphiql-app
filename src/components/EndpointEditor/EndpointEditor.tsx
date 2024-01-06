@@ -14,7 +14,10 @@ const EndpointEditor = () => {
   const text = textContent[lang as keyof TextContentType].dashboard;
 
   return (
-    <div className={"flex flex-col items-start justify-between w-full"} data-testid="endpoint">
+    <div
+      className={'flex flex-col items-start justify-between w-full'}
+      data-testid="endpoint"
+    >
       {!isEditing ? (
         <div className="pl-2 my-5  h-[40px] text-gray-300 overflow-hidden whitespace-nowrap overflow-ellipsis">
           {inputValue}

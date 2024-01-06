@@ -10,8 +10,8 @@ import { textContent, TextContentType } from '@/lib/langText';
 import Image from 'next/image';
 import homeSvg from '@/images/home.svg';
 import exitSvg from '@/images/exit.svg';
-import signIn from '@/images/signin.svg'
-import signUp from '@/images/signup.svg'
+import signIn from '@/images/signin.svg';
+import signUp from '@/images/signup.svg';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
