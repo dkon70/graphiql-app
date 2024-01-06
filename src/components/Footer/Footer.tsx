@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import githubIcon from '../../../public/github-mark-white.svg';
-import rsLogo from '../../../public/rs.jpg';
+import githubIcon from '@/images/github-mark-white.svg';
+import rsLogo from '@/images/rs.jpg';
 
 const Footer = () => {
   const githubNames = ['dkon70', 'NikitaStarmoussov', 'natanchik'];
 
   return (
     <footer
-      className="bg-slate-800 w-full p-5 flex max-md:flex-col max-md:gap-5 justify-between text-white items-center static"
+      className="bg-slate-800 w-full p-5 flex max-md:flex-col max-md:gap-5 justify-between text-white items-center  "
       data-testid="footer"
     >
       <section
