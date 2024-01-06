@@ -11,7 +11,7 @@ export default function Welcome() {
   const text = textContent[lang as keyof TextContentType].welcome;
 
   return (
-    <div className=" my-4 ">
+    <div className=" py-4 bg-white h-full">
       <div className="flex flex-col   items-center justify-center  text-center ">
         <div className="flex flex-col   items-center justify-center md:flex-row max-w-7xl">
           <Image

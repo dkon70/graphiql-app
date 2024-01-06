@@ -148,6 +148,7 @@ const dataSlice = createSlice({
     });
     builder.addCase(fetchSchema.fulfilled, (state, action) => {
       state.schema = action.payload;
+      state.schemaLoading = false;
     });
 
     builder.addCase(fetchSchema.pending, (state) => {
