@@ -109,13 +109,13 @@ const Main = () => {
       };
 
   return (
-    <div className='flex flex-col self-stretch items-stretch  grow h-[calc(100vh-160px)]'>
+    <div className='flex flex-col self-stretch items-stretch  grow h-[calc(100vh-160px)]' data-testid="main">
     
      <div className={`md:flex-row flex flex-col md:justify-between bg-slate-500 items-stretch self-stretch h-full max-h-[calc(100vh-220px)]`}>
         <div className='flex w-full h-full' >
           
         
-        <section className='flex  '>
+        <section className='flex  ' data-testid="section">
             <div className='flex flex-col gap-5 p-2  md:h-full h-[200px]'>
             <button
         className={cn(`${isDocsOpen? 'bg-slate-900' : 'bg-slate-700'}`,`  hover:bg-slate-600 rounded h-10 w-10 p-2 duration-150`)}
@@ -154,17 +154,17 @@ const Main = () => {
         </div>
             </div>: null}
         </section>
-            <section className='w-full'>
+            <section className='w-full' data-testid="section">
                 <QueryEditor/>
             </section>
             </div>
             <div className='flex w-full h-full'>
 
             
-        <section className=''> 
+        <section data-testid="section"> 
         <JSONViewerButtons />
         </section>
-        <section className='w-full'>
+        <section className='w-full' data-testid="section">
         <ResponseViewier/>
         </section>
         </div>

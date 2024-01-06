@@ -14,7 +14,7 @@ const EndpointEditor = () => {
   const text = textContent[lang as keyof TextContentType].dashboard;
 
   return (
-    <div className={"flex flex-col items-start justify-between w-full"}>
+    <div className={"flex flex-col items-start justify-between w-full"} data-testid="endpoint">
       {!isEditing ? (
         <div className="pl-2 my-5  h-[40px] text-gray-300 overflow-hidden whitespace-nowrap overflow-ellipsis">
           {inputValue}
@@ -26,7 +26,7 @@ const EndpointEditor = () => {
           onChange={(e) => dispatch(setUrl(e.target.value))}
         />
       )}
-      <Button variant="secondary" onClick={() => setEditing(!isEditing)}>
+      <Button variant="secondary" onClick={() => setEditing(!isEditing)} data-testid="button">
         {isEditing ? text.url.save : text.url.edit}
       </Button>
     </div>

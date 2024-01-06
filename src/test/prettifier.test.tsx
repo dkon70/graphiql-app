@@ -1,4 +1,5 @@
-import { prettifyText } from '@/lib/prettifier';
+import { prettifyText } from "@/lib/utils";
+
 
 const text1 = '{hgfjhg   :   {   fjhgkdh:   ghjhgj   }   ,djfhg   :fhgkdj}';
 const text2 = `{
@@ -6,19 +7,17 @@ const text2 = `{
     fjhgkdh: ghjhgj
   },
   djfhg: fhgkdj
-}
-`;
+}`;
 const text3 = `{
   field(arg: "value") {
     subField
   }
 }`;
 const text4 = `{
-  field(arg: "value")  {
+  field(arg: "value"){
     subField
   }
-}
-`;
+}`;
 const text5 = '(}';
 
 describe('Prettifier', () => {
