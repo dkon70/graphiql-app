@@ -8,6 +8,7 @@ import { signout } from '@/firebase/signOut';
 import { useLang } from '@/lib/langContext';
 import { textContent, TextContentType } from '@/lib/langText';
 
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [user] = useAuthState(auth);
@@ -26,7 +27,7 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full bg-slate-800 sticky z-10 top-0 flex p-5 duration-200 text-white items-center justify-between ${
+      className={`w-full sticky bg-slate-800 z-10 top-0 flex p-5 duration-200 text-white items-center justify-between ${
         isScrolled ? 'pt-2 pb-2' : ''
       }`}
       data-testid="header"

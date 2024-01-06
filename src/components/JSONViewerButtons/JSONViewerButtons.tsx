@@ -1,6 +1,6 @@
-import playImage from '../../../public/play.svg';
+import playImage from '@/images/play.svg';
 import Image from 'next/image';
-import broomImage from '../../../public/broom.svg';
+import broomImage from '@/images/broom.svg';
 import { useDispatch } from 'react-redux';
 import { fetchData } from '@/lib/store/slices';
 import { AppDispatch } from '@/lib/store/store';
@@ -13,7 +13,7 @@ const JSONViewerButtons = () => {
   }
 
   return (
-    <div className="flex flex-col gap-3 justify-start bg-slate-700 py-2 px-5">
+    <div className="flex flex-col gap-3 justify-start bg-slate-700 py-2 px-5 h-full">
       <button
         className="bg-green-500 hover:bg-green-400 rounded h-10 w-10 p-1 duration-150"
         onClick={onClickFetch}

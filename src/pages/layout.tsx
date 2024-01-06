@@ -17,14 +17,14 @@ const Layout = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <>
+    <div className='flex flex-col justify-between h-full'>
       <Header />
-      <main className="min-h-[calc(100vh-160px)]">
+      <main className=" bg-slate-500 grow">
         <Provider store={store}>{children}</Provider>
       </main>
       <Toaster />
       <Footer />
-    </>
+    </div>
   );
 };
 

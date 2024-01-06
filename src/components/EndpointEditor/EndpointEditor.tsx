@@ -14,14 +14,14 @@ const EndpointEditor = () => {
   const text = textContent[lang as keyof TextContentType].dashboard;
 
   return (
-    <div className="flex flex-col items-start">
+    <div className="flex flex-col items-start justify-between w-full">
       {!isEditing ? (
-        <div className="pl-2 my-5 w-full h-[40px] text-gray-300 overflow-hidden whitespace-nowrap overflow-ellipsis">
+        <div className="pl-2 my-5  h-[40px] text-gray-300 overflow-hidden whitespace-nowrap overflow-ellipsis">
           {inputValue}
         </div>
       ) : (
         <input
-          className="pl-2 my-5 w-full h-[40px] bg-white rounded text-black outline-none"
+          className="pl-2 my-5 w-full min-w-[400px] h-[40px] bg-white rounded text-black outline-none"
           value={inputValue}
           onChange={(e) => dispatch(setUrl(e.target.value))}
         />
