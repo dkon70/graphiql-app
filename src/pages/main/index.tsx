@@ -19,10 +19,15 @@ import { auth } from '@/firebase';
 import { useRouter } from 'next/router';
 import upArrow from '@/images/up-arrow.svg';
 import downArrow from '@/images/down-arrow.svg';
+import { useLang } from '@/lib/langContext';
+import { TextContentType, textContent } from '@/lib/langText';
 
 const Main = () => {
   const [isDocsOpen, setDocsOpen] = useState(false);
   const [isUrlOpen, setUrlOpen] = useState(false);
+
+  const { lang } = useLang();
+  const text = textContent[lang as keyof TextContentType].dashboard;
 
   const schema = useSelector((state: RootState) => state.data.schema);
   const schemaLoading = useSelector(
@@ -149,7 +154,7 @@ const Main = () => {
                     value={
                       schema
                         ? '"Docs": ' + JSON.stringify(schema, null, 2)
-                        : '"Docs": '
+                        : `${text.docs}: `
                     }
                     theme={dracula}
                     extensions={[javascript({ jsx: true })]}
@@ -165,7 +170,7 @@ const Main = () => {
               <div
                 className={`  transition delay-200 py-2 px-5 absolute z-30 inset-x-[50px] bg-slate-500 max-w-xs h-[calc(100vh-220px)]`}
               >
-                <h3 className="text-white pl-2 text-3xl">URL</h3>
+                <h3 className="text-white pl-2 text-3xl">{text.url.title}</h3>
                 <div className="w-full ">
                   <EndpointEditor />
                 </div>
@@ -201,7 +206,7 @@ const Main = () => {
               } hover:bg-slate-600 px-2 py-1 rounded duration-100`}
               onClick={variablesButtonHandler}
             >
-              Variables
+              {text.variables}
             </button>
             <button
               className={`bg-slate-700 ${
@@ -209,7 +214,7 @@ const Main = () => {
               } hover:bg-slate-600 px-2 py-1 rounded duration-100`}
               onClick={headersButtonHandler}
             >
-              Headers
+              {text.headers}
             </button>
           </div>
           <button
