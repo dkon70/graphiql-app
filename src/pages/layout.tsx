@@ -18,7 +18,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <div className='flex flex-col justify-between h-full'>
+    <div className="flex flex-col justify-between h-full">
       <Head>
         <title>GraphQl Sandbox</title>
       </Head>

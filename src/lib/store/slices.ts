@@ -156,7 +156,6 @@ const dataSlice = createSlice({
     });
 
     builder.addCase(fetchSchema.rejected, (state) => {
-      
       state.schemaLoading = false;
     });
   },

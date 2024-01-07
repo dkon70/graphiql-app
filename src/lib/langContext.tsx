@@ -41,9 +41,5 @@ export function LangProvider({ children }: Props) {
     switchLang,
   };
 
-  return (
-    <>
-      <LangContext.Provider value={value}>{children}</LangContext.Provider>
-    </>
-  );
+  return <LangContext.Provider value={value}>{children}</LangContext.Provider>;
 }

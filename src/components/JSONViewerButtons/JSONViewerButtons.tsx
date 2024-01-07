@@ -1,7 +1,7 @@
 import playImage from '@/images/play.svg';
 import Image from 'next/image';
 import broomImage from '@/images/broom.svg';
-import { useDispatch,  useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '@/lib/store/slices';
 import { AppDispatch } from '@/lib/store/store';
 import { prettifyText } from '@/lib/utils';

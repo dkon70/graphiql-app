@@ -1,5 +1,4 @@
-import { prettifyText } from "@/lib/utils";
-
+import { prettifyText } from '@/lib/utils';
 
 const text1 = '{hgfjhg   :   {   fjhgkdh:   ghjhgj   }   ,djfhg   :fhgkdj}';
 const text2 = `{
@@ -9,7 +8,7 @@ const text2 = `{
   djfhg: fhgkdj
 }`;
 const text3 = `{
-  field(arg: "value") {
+  field(arg: "value"){
     subField
   }
 }`;
