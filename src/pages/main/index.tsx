@@ -33,7 +33,6 @@ const Main = () => {
     if (schema === null) {
       dispatch(fetchSchema());
     }
-    console.log(schema);
     if (!isUrlOpen) {
       setDocsOpen(!isDocsOpen);
     } else {
